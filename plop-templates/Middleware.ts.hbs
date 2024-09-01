@@ -1,0 +1,9 @@
+import { NextFetchEvent, NextRequest, NextResponse } from 'next/server';
+
+export const {{camelCase name}}: MiddlewareFactory = (next) => {
+  return async (request: NextRequest, _next: NextFetchEvent) => {
+    
+
+    return next(request, _next);
+  };
+};

@@ -1,0 +1,3 @@
+.space {
+  @apply container mx-auto max-w-[1920px];
+}

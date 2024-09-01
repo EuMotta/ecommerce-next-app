@@ -1,0 +1,18 @@
+import Container from '@/components/common/container';
+import Section from '@/components/common/section';
+
+import styles from './{{kebabCase name}}.module.css';
+
+interface {{kebabCase name}}Props {}
+
+const {{pascalCase name}}: React.FC<{{kebabCase name}}Props> = () => {
+  return (
+    <Section>
+      <Container className={styles.container}>
+        {{kebabCase name}}
+      </Container>
+    </Section>
+  );
+};
+
+export default {{pascalCase name}};

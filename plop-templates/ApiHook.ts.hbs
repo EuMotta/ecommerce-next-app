@@ -1,0 +1,37 @@
+import api from '@/app/api/services/api';
+import { AxiosError } from 'axios';
+
+import { errorList } from '@/constants';
+
+{{#if paramList.length}}
+interface {{paramInterfaceName}} {
+  {{#each paramList}}
+  {{this}}?: {{lookup ../typeList @index}};
+  {{/each}}
+}
+{{/if}}
+
+export async function {{camelCase name}}(
+  {{#if paramList.length}}{ {{#each paramList}}{{this}}{{#unless @last}}, {{/unless}}{{/each}} }: {{paramInterfaceName}}{{/if}}
+) {
+  try {
+   const response = await api.{{lowerCase method}}('{{endpoint}}'{{#if paramList.length}}, {
+      params: {
+        {{#each paramList}}
+        {{this}},
+        {{/each}}
+      }
+    }{{/if}});
+    return response.data;
+  } catch (error) {
+    const _error = error as AxiosError<{ message: string }>;
+    if (_error.response) {
+      const { status, data } = _error.response;
+      const errorEntry = errorList.find((e) => e.statusCode === status);
+      if (errorEntry) {
+        throw new Error(data.message || errorEntry.message);
+      }
+    }
+    throw new Error('Um erro inesperado aconteceu');
+  }
+}
