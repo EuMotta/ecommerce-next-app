@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
 import { Widget } from '@/components/helper';
+import { Toaster } from '@/components/ui/sonner';
 import Providers from '@/providers';
 import { ThemeProvider } from '@/providers/theme-provider';
 
@@ -28,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <Providers>
           <ThemeProvider
@@ -37,6 +38,7 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+            <Toaster />
             {children}
             <div className="flex justify-end">
               <Widget />
