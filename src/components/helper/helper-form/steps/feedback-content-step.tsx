@@ -5,12 +5,12 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 
-import api from '@/app/api/services/api';
 import { Loading } from '@/components/loading';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
+import axios from 'axios';
 import { z } from 'zod';
 
 import { FeedbackType, feedbackTypes } from '..';
@@ -57,7 +57,7 @@ export function FeedbackContentStep({
   } = useMutation({
     mutationFn: async ({ comment, screenshot }: FeedbackFormData) => {
       try {
-        const result = await api.post('/feedbacks', {
+        const result = await axios.post('/feedbacks', {
           comment,
           screenshot,
         });

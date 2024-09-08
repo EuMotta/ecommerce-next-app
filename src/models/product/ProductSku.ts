@@ -21,10 +21,6 @@ const productSkuSchema = new mongoose.Schema({
     required: [true, 'Por favor, insira o SKU'],
     maxlength: [50, 'SKU pode ter no máximo 50 caracteres'],
   },
-  price: {
-    type: Number,
-    required: [true, 'Por favor, insira o preço'],
-  },
   quantity: {
     type: Number,
     required: [true, 'Por favor, insira a quantidade em estoque'],

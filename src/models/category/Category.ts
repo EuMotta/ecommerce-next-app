@@ -11,12 +11,6 @@ const categorySchema = new mongoose.Schema(
       type: String,
       maxlength: [250, 'Descrição pode ter no máximo 250 caracteres'],
     },
-    sub_categories: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'SubCategory',
-      },
-    ],
     deleted_at: {
       type: Date,
     },

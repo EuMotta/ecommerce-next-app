@@ -11,7 +11,7 @@ interface {{paramInterfaceName}} {
 
 export function use{{pascalCase name}}({{#if paramList.length}}{ {{#each paramList}}{{this}}{{#unless @last}}, {{/unless}}{{/each}} }: {{paramInterfaceName}}{{/if}}): UseQueryResult{{#if typeName}}<{{typeName}}[], Error>{{else}}<any, Error>{{/if}} {
   return useQuery({
-    queryKey: ['key-{{kebabCase name}}', {{#each paramList}}{{this}}{{#unless @last}}, {{/unless}}{{/each}}],
+    queryKey: ['{{kebabCase name}}', {{#each paramList}}{{this}}{{#unless @last}}, {{/unless}}{{/each}}],
     queryFn: () => {{camelCase name}}({
       {{#each hookParams}}
       {{this.name}},

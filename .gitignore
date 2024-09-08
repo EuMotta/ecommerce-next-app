@@ -36,3 +36,9 @@ yarn-error.log*
 next-env.d.ts
 
 *storybook.log
+
+
+# routes
+/src/app/api/admin
+
+/src/utils/DBReset

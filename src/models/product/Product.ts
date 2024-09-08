@@ -11,9 +11,19 @@ const productSchema = new mongoose.Schema(
       type: String,
       maxlength: [500, 'Descrição pode ter no máximo 500 caracteres'],
     },
+    slug: {
+      type: String,
+      unique: true,
+      maxlength: [100, 'Slug pode ter no máximo 500 caracteres'],
+    },
     summary: {
       type: String,
       maxlength: [250, 'Resumo pode ter no máximo 250 caracteres'],
+    },
+    price: {
+      type: Number,
+      required: [true, 'Por favor, insira o preço do produto'],
+      min: [0, 'O preço não pode ser negativo'],
     },
     cover: {
       type: String,
@@ -26,16 +36,12 @@ const productSchema = new mongoose.Schema(
       type: String,
       maxlength: [50, 'SKU pode ter no máximo 50 caracteres'],
     },
-    price: {
-      type: Number,
-      required: [true, 'Por favor, insira o preço do produto'],
-    },
-    category_id: {
+    image: [{ type: String }],
+    category: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Category',
       required: [true, 'Por favor, associe o produto a uma categoria'],
     },
-
     deletedAt: {
       type: Date,
     },

@@ -21,7 +21,7 @@ export const auth: MiddlewareFactory = (next) => {
     const isAuthRoute = authRoutes.includes(request.nextUrl.pathname);
 
     if (!session && isProtectedRoute) {
-      const absoluteURL = new URL('/nao-autorizado', request.nextUrl.origin);
+      const absoluteURL = new URL('/unauthorized', request.nextUrl.origin);
       return NextResponse.rewrite(absoluteURL.toString());
     }
     if (session && isAuthRoute) {

@@ -1,4 +1,6 @@
 import bcrypt from 'bcryptjs';
+import mongoose from 'mongoose';
+
 export const data = {
   user: [
     {
@@ -14,20 +16,66 @@ export const data = {
   ],
   category: [
     {
-      name: 'Category 1',
-      description: 'Description for Category 1',
+      _id: '66dcc4ab55c8d7a840dbbd64',
+      name: 'Electronics',
+      description: 'Various electronic devices and gadgets.',
+      created_at: new Date(),
     },
   ],
   sub_category: [
     {
-      id: '65b9cb0228578c99f32f1f17',
-      name: 'Sub Category 1',
-      description: 'Description for Sub Category 1',
+      _id: '66dcc4ff55c8d7a840dbbd6e',
+      parent_id: '66dcc4ab55c8d7a840dbbd64',
+      name: 'Smartphones',
+      description: 'Latest models of smartphones.',
+      created_at: new Date(),
     },
     {
-      id: '65b9cb0228578c99f32f1f16',
-      name: 'Sub Category 2',
-      description: 'Description for Sub Category 2',
+      _id: '66dcc4ff55c8d7a840dbbd6f',
+      parent_id: '66dcc4ab55c8d7a840dbbd64',
+      name: 'Laptops',
+      description: 'Wide range of laptops.',
+      created_at: new Date(),
+    },
+  ],
+  product_attribute: [
+    {
+      _id: new mongoose.Types.ObjectId(),
+      type: 'color',
+      value: 'Black',
+      created_at: new Date(),
+    },
+    {
+      _id: new mongoose.Types.ObjectId(),
+      type: 'size',
+      value: '128GB',
+      created_at: new Date(),
+    },
+  ],
+  product: [
+    {
+      _id: '66dcc5c1d74d8f522ccb8e23',
+      name: 'iPhone 13',
+      description: 'Latest iPhone with 5G technology.',
+      price: 250,
+      image: ['/products/phone.png'],
+      slug: 'iphone-13-the-new-iphone-13-with-a15-chip.',
+      summary: 'The new iPhone 13 with A15 chip.',
+      cover: '/products/coverphone.png',
+      category: '66dcc4ab55c8d7a840dbbd64',
+      created_at: new Date(),
+    },
+  ],
+  product_sku: [
+    {
+      _id: new mongoose.Types.ObjectId(),
+      product: '66dcc5c1d74d8f522ccb8e23',
+      size_attribute: '',
+      color_attribute: '',
+      sku: 'IP13-BLK-128GB',
+      price: 999.99,
+      quantity: 50,
+      created_at: new Date(),
     },
   ],
 };

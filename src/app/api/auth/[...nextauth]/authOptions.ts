@@ -64,7 +64,6 @@ export const authOptions = {
           console.error('token.lastName is not a string');
         }
       }
-      console.log(session);
 
       return session;
     },
