@@ -39,7 +39,7 @@ const ProductCard = ({ product }: { product: Product }) => {
       </Link>
       <CardFooter className="flex justify-between border-t p-4">
         <Button variant={'link'}>{product.category.name}</Button>
-        <p>{currencyConverter(product.skus[0].price)}</p>
+        <p>{currencyConverter(product.price)}</p>
       </CardFooter>
     </Card>
   );

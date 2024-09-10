@@ -4,10 +4,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import db from '@/lib/mongodb';
 import Category from '@/models/category/Category';
 import Product from '@/models/product/Product';
+import ProductSKU from '@/models/product/ProductSKU';
 import mongoose from 'mongoose';
 
 import { authOptions } from '../../auth/[...nextauth]/authOptions';
-import ProductSKU from '@/models/product/ProductSKU';
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);

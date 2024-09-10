@@ -53,6 +53,24 @@ const productSchema = new mongoose.Schema(
         required: [true, 'Por favor, insira pelo menos um SKU'],
       },
     ],
+    price: {
+      type: Number,
+      required: [true, 'Por favor, insira o preço do produto'],
+      min: [0, 'O preço não pode ser negativo'],
+    },
+    technicalSpecifications: {
+      characteristics: {
+        type: String,
+        maxlength: [100, 'caracteristicas pode ter no máximo 100 caracteres'],
+        required: [true, 'Por favor, formeça as caracteristicas do produto'],
+      },
+      specifications: [
+        {
+          title: { type: String },
+          description: [{ type: String }],
+        },
+      ],
+    },
     image: [{ type: String }],
     category: {
       type: mongoose.Schema.Types.ObjectId,

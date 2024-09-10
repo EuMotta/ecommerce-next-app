@@ -54,7 +54,12 @@ export async function GET(request: NextRequest) {
     const relatedProducts = await Product.find({
       _id: { $ne: product._id },
       category: product.category._id,
-    }).limit(4);
+    })
+      .populate({
+        path: 'skus',
+        select: 'sku price -_id',
+      })
+      .limit(4);
 
     return NextResponse.json(
       {

@@ -8,6 +8,7 @@ export interface Product extends Timestamps {
   name: string;
   description: string;
   image: string[];
+  technicalSpecifications: TechnicalSpecifications;
   summary: string;
   slug: string;
   price: number;
@@ -16,7 +17,15 @@ export interface Product extends Timestamps {
   cover: string;
   category_id: string;
 }
-
+export interface TechnicalSpecifications {
+  characteristics: string;
+  specifications: Specification[];
+}
+export interface Specification {
+  title: string;
+  description: string[];
+  _id: string;
+}
 export interface HookProduct extends HTTP {
   data: Product[];
 }

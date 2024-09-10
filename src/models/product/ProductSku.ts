@@ -6,11 +6,6 @@ const productSKUSchema = new mongoose.Schema({
     ref: 'Product',
     required: [true, 'Por favor, associe o SKU a um produto'],
   },
-  price: {
-    type: Number,
-    required: [true, 'Por favor, insira o preço do produto'],
-    min: [0, 'O preço não pode ser negativo'],
-  },
   size: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'ProductAttribute',
@@ -21,19 +16,7 @@ const productSKUSchema = new mongoose.Schema({
     ref: 'ProductAttribute',
     required: [true, 'Por favor, associe o SKU a um atributo de cor'],
   },
-  technicalSpecifications: {
-    characteristics: {
-      type: String,
-      maxlength: [100, 'caracteristicas pode ter no máximo 100 caracteres'],
-      required: [true, 'Por favor, formeça as caracteristicas do produto'],
-    },
-    specifications: [
-      {
-        title: { type: String },
-        description: [{ type: String }],
-      },
-    ],
-  },
+
   sku: {
     type: String,
     required: [true, 'Por favor, insira o SKU'],

@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react';
 import Container from '@/components/common/container';
 import CepInputForm from '@/components/input/cep-input-form';
 import { ProductCarousel } from '@/components/product/product-carousel';
+import ProductComments from '@/components/product/product-comments';
+import TechnicalSpecifications from '@/components/product/product-technicalSpecifications';
 import StarRating from '@/components/rating/star';
 import { SellerRatingChart } from '@/components/seller/rating-chart';
 import { Button } from '@/components/ui/button';
@@ -16,8 +18,10 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useGetProductRatings } from '@/hooks/data-product-ratings/get-product-ratings';
 import { useGetProduct } from '@/hooks/data-product/get-product';
 import { Sku } from '@/interfaces/sku';
+import { BsCartXFill } from 'react-icons/bs';
 import { HeartIcon, ShoppingBagIcon, Tag } from 'lucide-react';
 
 import currencyConverter from '@/utils/Conversions/currencyConverter';
@@ -28,13 +32,25 @@ interface Params {
   };
 }
 const Page = ({ params }: Params) => {
+  const [commentsSize, setCommentsSize] = useState<number>(2);
   const {
     data: products,
     isLoading,
     isError,
     error,
   } = useGetProduct(params.slug);
-  console.log(products);
+  const {
+    data: ratings,
+    isLoading: isLoadingRatings,
+    isError: isErrorRatings,
+    error: errorRatings,
+    refetch: refetchRatings,
+  } = useGetProductRatings({ slug: params.slug, size: commentsSize });
+
+  const loadMoreComments = () => {
+    setCommentsSize((prevSize) => prevSize + 5);
+  };
+
   const product = products?.data;
   const [selectedSku, setSelectedSku] = useState<Sku | null>(null);
 
@@ -69,8 +85,14 @@ const Page = ({ params }: Params) => {
                 </div>
                 <div className="h-6 border-l border-muted" />
                 <div className="flex items-center space-x-2">
-                  <StarRating rating={2} />
-                  <span className="text-xs text-orange-500">(27)</span>
+                  <span className="text-xs">
+                    {ratings?.average_rating?.toFixed(1)}
+                  </span>
+                  <StarRating rating={ratings?.average_rating ?? 0} />
+
+                  <span className="text-xs text-orange-500">
+                    ({ratings?.total_ratings})
+                  </span>
                 </div>
                 <div className="h-6 border-l border-muted" />
                 <div className="flex items-center space-x-2">
@@ -98,7 +120,7 @@ const Page = ({ params }: Params) => {
                     </Link>
                   </span>
                   <h1 className="text-primary">
-                    {currencyConverter(selectedSku?.price)}
+                    {currencyConverter(product.price)}
                   </h1>
                   <span className="text-xs text-muted-foreground">
                     À vista no boleto
@@ -106,40 +128,41 @@ const Page = ({ params }: Params) => {
                   <br />
                   <span className="text-xs text-muted-foreground">
                     ou em até 10x de{' '}
-                    <strong>
-                      {currencyConverter(selectedSku?.price / 10)}
-                    </strong>{' '}
-                    no cartão
+                    <strong>{currencyConverter(product.price / 10)}</strong> no
+                    cartão
                   </span>
-                  <br />
-                  <span className="text-xs text-muted-foreground">
-                    <Link href={'/'} className="underline">
+                  <br />{' '}
+                  <Link href={'/'} className="underline">
+                    <span className="text-xs text-muted-foreground">
                       Opções de pagamento
-                    </Link>
-                  </span>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button
-                        variant="outline"
-                        className="w-[150px] justify-start"
-                      >
-                        {selectedSku
-                          ? `${selectedSku.size.value} - ${selectedSku.color.value}`
-                          : 'Select SKU'}
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                      {product.skus.map((sku) => (
-                        <DropdownMenuItem
-                          key={sku.sku}
-                          onSelect={() => handleSkuChange(sku)}
-                        >
-                          {`${sku.size.value} - ${sku.color.value}`}
-                        </DropdownMenuItem>
-                      ))}
-                    </DropdownMenuContent>
-                  </DropdownMenu>
+                    </span>
+                  </Link>
                 </div>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className="w-[150px] justify-start"
+                    >
+                      {selectedSku ? selectedSku.sku : product.skus[0].sku}
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    {product.skus.map((sku) => (
+                      <DropdownMenuItem
+                        key={sku.sku}
+                        onSelect={() => handleSkuChange(sku)}
+                        disabled={sku.quantity < 1}
+                        className="gap-2"
+                      >
+                        {sku.sku}{' '}
+                        {sku.quantity < 1 && (
+                          <BsCartXFill className="text-destructive" />
+                        )}
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
                 <SellerRatingChart />
                 <div>
                   <p className="flex gap-2 uppercase">
@@ -177,42 +200,22 @@ const Page = ({ params }: Params) => {
               </div>
             </div>
           </div>
-          <div>
-            <div className="mb-4 flex gap-2">
-              {product.skus.map((sku, index) => (
-                <Button
-                  key={index}
-                  variant={selectedSku === sku ? 'default' : 'outline'}
-                  className={`border px-4 py-2`}
-                  onClick={() => setSelectedSku(sku)}
-                >
-                  {sku.sku} - {sku.size.value} - {sku.color.value}
-                </Button>
-              ))}
-            </div>
-
-            <div>
-              <h4 className="flex gap-2 uppercase">
-                <Tag className="text-primary" size={26} />
-                <strong>Descrição</strong>
-              </h4>
-              <div>
-                {selectedSku &&
-                  selectedSku.technicalSpecifications.specifications.map(
-                    (spec) => (
-                      <div key={spec._id} className="mb-4">
-                        <h5 className="font-bold">{spec.title}</h5>
-                        <ul className="list-inside list-disc">
-                          {spec.description.map((desc, index) => (
-                            <li key={index}>{desc}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    ),
-                  )}
-              </div>
-            </div>
-          </div>
+          <TechnicalSpecifications
+            specifications={product.technicalSpecifications.specifications}
+            characteristics={product.technicalSpecifications.characteristics}
+          />
+          {ratings && (
+            <ProductComments
+              refetch={refetchRatings}
+              slug={params.slug}
+              ratings={ratings}
+              errorRatings={errorRatings ?? new Error('Unknown error')}
+              isErrorRatings={isErrorRatings}
+              commentsSize={commentsSize}
+              isLoadingRatings={isLoadingRatings}
+              loadMoreComments={loadMoreComments}
+            />
+          )}
         </Container>
       )}
     </div>
