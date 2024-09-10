@@ -4,56 +4,69 @@ import { NextRequest, NextResponse } from 'next/server';
 import db from '@/lib/mongodb';
 import Category from '@/models/category/Category';
 import Product from '@/models/product/Product';
+import ProductAttribute from '@/models/product/ProductAttribute';
+import ProductSKU from '@/models/product/ProductSKU';
 import mongoose from 'mongoose';
 
 import { authOptions } from '../../auth/[...nextauth]/authOptions';
-import ProductSKU from '@/models/product/ProductSKU';
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
-  const page = parseInt(searchParams.get('page') || '1', 10);
-  const search = searchParams.get('search') || '';
-  const per_page = parseInt(searchParams.get('per_page') || '10', 10);
-  const skip = (page - 1) * per_page;
+  const slug = searchParams.get('slug') || '';
 
   const session = await getServerSession(authOptions);
+
   if (!session || !session.user) {
     return new Response('Não autenticado', { status: 401 });
   }
 
   try {
     await db.connect();
-    const query = search ? { name: { $regex: search, $options: 'i' } } : {};
     mongoose.model('category', Category.schema);
-    mongoose.model('ProductSKU', ProductSKU.schema);
-    const total_products = await Product.countDocuments(query);
+    mongoose.model('sku', ProductSKU.schema);
+    mongoose.model('ProductAttribute', ProductAttribute.schema);
 
-    const products = await Product.find(query)
-      .skip(skip)
-      .limit(per_page)
+    const product = await Product.findOne({ slug: slug })
       .populate({
         path: 'category',
         select: 'name',
       })
       .populate({
         path: 'skus',
-        select: 'sku price -_id',
+        select:
+          'sku price technicalSpecifications size_attribute color_attribute quantity -_id',
+        populate: [
+          {
+            path: 'size',
+            select: 'value -_id',
+          },
+          {
+            path: 'color',
+            select: 'value -_id',
+          },
+        ],
       });
 
-    await db.disconnect();
+    if (!product) {
+      await db.disconnect();
+      throw new Error('Product not found');
+    }
+    const relatedProducts = await Product.find({
+      _id: { $ne: product._id },
+      category: product.category._id,
+    }).limit(4);
 
     return NextResponse.json(
       {
-        data: products,
-        total_pages: Math.ceil(total_products / per_page),
-        current_page: page,
-        total_products,
+        data: product,
+        related_products: relatedProducts,
       },
       { status: 200 },
     );
   } catch (error) {
     console.error(error);
-    await db.disconnect();
     return new Response(String(error), { status: 400 });
+  } finally {
+    await db.disconnect();
   }
 }

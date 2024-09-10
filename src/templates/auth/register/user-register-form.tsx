@@ -6,13 +6,12 @@ import * as React from 'react';
 import { useForm } from 'react-hook-form';
 import { AiOutlineLoading } from 'react-icons/ai';
 
-import api from '@/app/api/services/api';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, UseMutationResult } from '@tanstack/react-query';
-import { AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
@@ -67,7 +66,7 @@ export function UserRegisterForm({ className, ...props }: UserAuthFormProps) {
   }: UseMutationResult<AxiosResponse, Error, LoginFormData> = useMutation({
     mutationFn: async (data: LoginFormData) => {
       try {
-        const result = await api.post('/api/auth/signup', data);
+        const result = await axios.post('/api/auth/signup', data);
         return result;
       } catch (error: any) {
         throw new Error(

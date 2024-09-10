@@ -1,5 +1,4 @@
 import bcrypt from 'bcryptjs';
-import mongoose from 'mongoose';
 
 export const data = {
   user: [
@@ -40,14 +39,14 @@ export const data = {
   ],
   product_attribute: [
     {
-      _id: new mongoose.Types.ObjectId(),
-      type: 'color',
+      _id: '66de34921957e148d7440f01',
+      type: 'Cor',
       value: 'Black',
       created_at: new Date(),
     },
     {
-      _id: new mongoose.Types.ObjectId(),
-      type: 'size',
+      _id: '66de34921957e148d7440f02',
+      type: 'Tamanho',
       value: '128GB',
       created_at: new Date(),
     },
@@ -56,9 +55,12 @@ export const data = {
     {
       _id: '66dcc5c1d74d8f522ccb8e23',
       name: 'iPhone 13',
+      number: 1,
       description: 'Latest iPhone with 5G technology.',
-      price: 250,
       image: ['/products/phone.png'],
+      weight: 100,
+      warranty: 3,
+      skus: ['66de35051957e148d7440f22'],
       slug: 'iphone-13-the-new-iphone-13-with-a15-chip.',
       summary: 'The new iPhone 13 with A15 chip.',
       cover: '/products/coverphone.png',
@@ -68,14 +70,27 @@ export const data = {
   ],
   product_sku: [
     {
-      _id: new mongoose.Types.ObjectId(),
+      _id: '66de35051957e148d7440f22',
       product: '66dcc5c1d74d8f522ccb8e23',
-      size_attribute: '',
-      color_attribute: '',
+      size: '66de34921957e148d7440f02',
+      color: '66de34921957e148d7440f01',
+      price: 250,
       sku: 'IP13-BLK-128GB',
-      price: 999.99,
       quantity: 50,
-      created_at: new Date(),
+      created_at: '2024-09-08T00:00:00Z',
+      technicalSpecifications: {
+        characteristics: 'Exemplo de características do produto',
+        specifications: [
+          {
+            title: 'Tela',
+            description: ['6.1 polegadas', 'Super Retina XDR'],
+          },
+          {
+            title: 'Processador',
+            description: ['A15 Bionic', '6 núcleos'],
+          },
+        ],
+      },
     },
   ],
 };

@@ -53,6 +53,7 @@ const Logo = ({ type = 'normal', size = 100, themeMode }: LogoProps) => {
       width={size}
       height={size}
       priority
+      className="object-contain"
     />
   );
 };

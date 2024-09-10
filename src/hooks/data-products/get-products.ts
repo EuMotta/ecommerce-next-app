@@ -1,4 +1,4 @@
-import { getProducts } from '@/app/api/data/products/get/get-data';
+import { getProducts } from '@/app/api/data/products/get/get-products';
 import { HTTP } from '@/interfaces/http';
 import { HookProduct } from '@/interfaces/product';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
