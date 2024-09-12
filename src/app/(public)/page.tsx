@@ -1,24 +1,46 @@
 'use client';
 
-import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
-import Container from '@/components/common/container';
-export default function Home() {
+import { PaginationWithLinks } from '@/components/pagination';
+import ProductCard from '@/components/product/product-card';
+import { ThemeToggle } from '@/components/ui/theme-button';
+import { useGetProducts } from '@/hooks/data-products/get-products';
+import { z } from 'zod';
+
+const Page = () => {
+  const searchParams = useSearchParams();
+  const per_page = z.coerce.number().parse(searchParams.get('per_page') ?? '2');
+  const page = z.coerce.number().parse(searchParams.get('page') ?? '1');
+
+  const { data, isLoading, isError, error } = useGetProducts({
+    page,
+    per_page,
+  });
+  const pageSizeOptions = [5, 10, 15, 20];
   return (
-    <main>
-      <Container className="bg-light-primary flex min-h-[90vh] flex-col justify-between p-10">
-        <div className="flex justify-evenly">
-          <Link href="https://github.com/EuMotta" target="_blank">
-            GitHub
-          </Link>
-          <Link
-            href="https://www.linkedin.com/in/jos%C3%A9-antonio-bueno-motta-61006a26b/"
-            target="_blank"
-          >
-            LinkedIn
-          </Link>
-        </div>
-      </Container>
-    </main>
+    <div>
+      <ThemeToggle />
+      {isLoading && <div>Carregando...</div>}
+      {isError && <div>Erro: {error?.message}</div>}
+      <div className="grid grid-cols-3 gap-5">
+        {data &&
+          data.data &&
+          data.data.map((product) => (
+            <ProductCard key={product._id} product={product} />
+          ))}
+      </div>
+      <PaginationWithLinks
+        page={page}
+        pageSize={per_page}
+        totalCount={data?.total_count ?? 0}
+        pageSizeSelectOptions={{
+          pageSizeOptions,
+          pageSizeSearchParam: 'limit',
+        }}
+      />
+    </div>
   );
-}
+};
+
+export default Page;

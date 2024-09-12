@@ -1,15 +1,15 @@
-import { getProducts } from '@/app/api/data/products/get/get-products';
-import { HTTP } from '@/interfaces/http';
+import { getProducts } from '@/app/api/data/products/get-products';
 import { HookProduct } from '@/interfaces/product';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
-export function useGetProducts({
-  page,
-  per_page,
-  search,
-}: HTTP): UseQueryResult<HookProduct, Error> {
+export function useGetProducts(
+  filters: {
+    page?: number;
+    per_page?: number;
+  } = {},
+): UseQueryResult<HookProduct, Error> {
   return useQuery({
-    queryKey: ['get-products', page, per_page, search],
-    queryFn: () => getProducts({ page, per_page, search }),
+    queryKey: ['get-products', filters],
+    queryFn: () => getProducts(filters),
   });
 }

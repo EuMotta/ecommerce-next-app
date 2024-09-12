@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { BsCartXFill } from 'react-icons/bs';
 
 import Container from '@/components/common/container';
 import CepInputForm from '@/components/input/cep-input-form';
@@ -21,7 +22,6 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { useGetProductRatings } from '@/hooks/data-product-ratings/get-product-ratings';
 import { useGetProduct } from '@/hooks/data-product/get-product';
 import { Sku } from '@/interfaces/sku';
-import { BsCartXFill } from 'react-icons/bs';
 import { HeartIcon, ShoppingBagIcon, Tag } from 'lucide-react';
 
 import currencyConverter from '@/utils/Conversions/currencyConverter';
@@ -39,20 +39,20 @@ const Page = ({ params }: Params) => {
     isError,
     error,
   } = useGetProduct(params.slug);
+  const product = products?.product;
   const {
-    data: ratings,
+    data: reviews,
     isLoading: isLoadingRatings,
     isError: isErrorRatings,
     error: errorRatings,
     refetch: refetchRatings,
-  } = useGetProductRatings({ slug: params.slug, size: commentsSize });
-
+  } = useGetProductRatings({ id: product?._id, limit: commentsSize });
   const loadMoreComments = () => {
     setCommentsSize((prevSize) => prevSize + 5);
   };
 
-  const product = products?.data;
   const [selectedSku, setSelectedSku] = useState<Sku | null>(null);
+  console.log(reviews);
 
   useEffect(() => {
     if (product) {
@@ -86,12 +86,12 @@ const Page = ({ params }: Params) => {
                 <div className="h-6 border-l border-muted" />
                 <div className="flex items-center space-x-2">
                   <span className="text-xs">
-                    {ratings?.average_rating?.toFixed(1)}
+                    {reviews?.average_rating?.toFixed(1)}
                   </span>
-                  <StarRating rating={ratings?.average_rating ?? 0} />
+                  <StarRating rating={reviews?.average_rating ?? 0} />
 
                   <span className="text-xs text-orange-500">
-                    ({ratings?.total_ratings})
+                    ({reviews?.total_count})
                   </span>
                 </div>
                 <div className="h-6 border-l border-muted" />
@@ -204,11 +204,11 @@ const Page = ({ params }: Params) => {
             specifications={product.technicalSpecifications.specifications}
             characteristics={product.technicalSpecifications.characteristics}
           />
-          {ratings && (
+          {reviews && (
             <ProductComments
               refetch={refetchRatings}
               slug={params.slug}
-              ratings={ratings}
+              reviews={reviews}
               errorRatings={errorRatings ?? new Error('Unknown error')}
               isErrorRatings={isErrorRatings}
               commentsSize={commentsSize}

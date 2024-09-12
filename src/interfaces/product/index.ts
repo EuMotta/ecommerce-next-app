@@ -28,9 +28,10 @@ export interface Specification {
 }
 export interface HookProduct extends HTTP {
   data: Product[];
+  total_count: number;
 }
 
 export interface ProductPage {
-  data: Product;
+  product: Product;
   related_products: Product[];
 }

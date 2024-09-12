@@ -1,12 +1,12 @@
 import { User } from '../user';
 
-export interface Ratings {
-  ratings: Rating[];
-  total_ratings: number;
+export interface Reviews {
+  reviews: Review[];
+  total_count: number;
   average_rating: number;
 }
 
-export interface Rating {
+export interface Review {
   _id: string;
   user: User;
   product: string;

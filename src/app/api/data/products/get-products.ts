@@ -2,17 +2,15 @@ import axios, { AxiosError } from 'axios';
 
 import { errorList } from '@/constants';
 
-interface GetRatings {
-  slug: string;
-  size: number;
-}
-export async function getProductRatings({ size, slug }: GetRatings) {
+export async function getProducts(
+  filters: {
+    page?: number;
+    per_page?: number;
+  } = {},
+) {
   try {
-    const response = await axios.get('/api/data/ratings', {
-      params: {
-        size,
-        slug,
-      },
+    const response = await axios.get('/api/data/products', {
+      params: { page: filters.page, per_page: filters.per_page },
     });
     return response.data;
   } catch (error) {

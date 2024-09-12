@@ -56,7 +56,7 @@ export const data = {
     {
       _id: '66dcc5c1d74d8f522ccb8e23',
       name: 'iPhone 13',
-      number: 1,
+      code: 1,
       description:
         'O iPhone 13 é o modelo mais recente da Apple, oferecendo desempenho superior com o chip A15 Bionic e conectividade 5G.',
       image: ['/products/phone.png'],
@@ -121,7 +121,7 @@ export const data = {
       slug: 'iphone-13-the-new-iphone-13-with-a15-chip.',
       summary: 'The new iPhone 13 with A15 chip.',
       cover: '/products/coverphone.png',
-      category: '66dcc4ab55c8d7a840dbbd64',
+      category: ['66dcc4ab55c8d7a840dbbd64'],
       created_at: new Date(),
     },
   ],
@@ -136,7 +136,7 @@ export const data = {
       created_at: '2024-09-08T00:00:00Z',
     },
     {
-      _id: '66de35051957e148d7440f22',
+      _id: '66de35051957e148d7440e22',
       product: '66dcc5c1d74d8f522ccb8e23',
       size: '66de34921957e148d7440f02',
       color: '66de34921957e148d7440f01',
@@ -145,7 +145,7 @@ export const data = {
       created_at: '2024-09-08T00:00:00Z',
     },
     {
-      _id: '66de35051957e148d7440f22',
+      _id: '66de35051957e148d7440c22',
       product: '66dcc5c1d74d8f522ccb8e23',
       size: '66de34921957e148d7440f02',
       color: '66de34921957e148d7440f01',

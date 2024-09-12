@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 
-import { Ratings } from '@/interfaces/rating';
+import { Reviews } from '@/interfaces/review';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
@@ -24,7 +24,7 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 interface ProductCommentsProps {
-  ratings: Ratings;
+  reviews: Reviews;
   slug: string;
   isLoadingRatings: boolean;
   isErrorRatings: boolean | null;
@@ -36,7 +36,7 @@ interface ProductCommentsProps {
 
 const ProductComments = ({
   slug,
-  ratings,
+  reviews,
   isLoadingRatings,
   isErrorRatings,
   errorRatings,
@@ -61,7 +61,7 @@ const ProductComments = ({
     useMutation({
       mutationFn: async (data: FormData) => {
         try {
-          const response = await axios.post('/api/data/ratings', {
+          const response = await axios.post('/api/data/reviews', {
             rating: data.rating,
             comment: data.comment,
             slug,
@@ -104,9 +104,9 @@ const ProductComments = ({
           {isErrorRatings && (
             <div className="text-destructive">{errorRatings?.message}</div>
           )}
-          {ratings &&
-            ratings.ratings &&
-            ratings.ratings.map((comment) => (
+          {reviews &&
+            reviews.reviews &&
+            reviews.reviews.map((comment) => (
               <div key={comment._id}>
                 <div
                   key={comment._id}
@@ -135,17 +135,17 @@ const ProductComments = ({
                 </div>
               </div>
             ))}
-          {ratings && ratings.ratings && ratings.ratings.length > 0 && (
+          {reviews && reviews.reviews && reviews.reviews.length > 0 && (
             <Button
               onClick={loadMoreComments}
               type="button"
-              disabled={ratings?.total_ratings <= commentsSize}
+              disabled={reviews?.total_count <= commentsSize}
               className="mt-4 w-full"
             >
               Carregar mais comentários
             </Button>
           )}
-          {ratings && ratings.ratings && ratings.ratings.length < 1 && (
+          {reviews && reviews.reviews && reviews.reviews.length < 1 && (
             <span className="text-destructive">Nenhum comentário ainda</span>
           )}
         </div>
