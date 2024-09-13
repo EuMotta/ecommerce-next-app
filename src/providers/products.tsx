@@ -1,7 +1,6 @@
 'use client';
 import { createContext, useContext } from 'react';
 
-import { useGetProducts } from '@/hooks/data-products/get-products';
 import { HTTP } from '@/interfaces/http';
 import { HookProduct } from '@/interfaces/product';
 
@@ -9,11 +8,10 @@ import { ChildrenProps } from '../../@Types/global';
 
 interface ContextType {
   data: HookProduct | undefined;
-  isLoading: boolean;
-  isError: boolean;
-  error: Error | null;
 }
-interface Provider extends HTTP, ChildrenProps {}
+interface Provider extends HTTP, ChildrenProps {
+  data: HookProduct;
+}
 
 const StatisticsContext = createContext<ContextType | null>(null);
 
@@ -25,23 +23,9 @@ export function useProducts() {
   return context;
 }
 
-export function ProductsProvider({
-  children,
-  page,
-  per_page,
-  search,
-}: Provider) {
-  const { data, isLoading, isError, error } = useGetProducts({
-    page,
-    per_page,
-    search,
-  });
-
+export function ProductsProvider({ children, data }: Provider) {
   const contextValue: ContextType = {
     data: data,
-    isLoading,
-    isError,
-    error,
   };
 
   return (

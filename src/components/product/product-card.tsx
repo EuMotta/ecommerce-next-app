@@ -26,7 +26,7 @@ const ProductCard = ({ product }: { product: Product }) => {
               <img
                 src={product.image[0]}
                 alt={product.name}
-                className="h-32 w-full rounded-lg object-cover"
+                className="h-32 w-full rounded-lg object-contain"
               />
             )}
           </div>
@@ -38,7 +38,7 @@ const ProductCard = ({ product }: { product: Product }) => {
         </CardContent>
       </Link>
       <CardFooter className="flex justify-between border-t p-4">
-        <Button variant={'link'}>{product.category.name}</Button>
+        <Button variant={'link'}>{product.sub_category.name}</Button>
         <p>{currencyConverter(product.price)}</p>
       </CardFooter>
     </Card>

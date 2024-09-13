@@ -12,7 +12,7 @@ export interface Product extends Timestamps {
   summary: string;
   slug: string;
   price: number;
-  category: Category;
+  sub_category: Category;
   skus: Sku[];
   cover: string;
   category_id: string;
@@ -28,9 +28,10 @@ export interface Specification {
 }
 export interface HookProduct extends HTTP {
   data: Product[];
+  total_count: number;
 }
 
 export interface ProductPage {
-  data: Product;
+  product: Product;
   related_products: Product[];
 }

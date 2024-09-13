@@ -1,5 +1,5 @@
 export interface HTTP {
-  page: string;
-  per_page: string;
-  search: string;
+  page: number;
+  per_page: number;
+  search?: string;
 }

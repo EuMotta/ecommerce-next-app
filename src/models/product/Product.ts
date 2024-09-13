@@ -11,7 +11,7 @@ const productSchema = new mongoose.Schema(
       type: String,
       maxlength: [500, 'Descrição pode ter no máximo 500 caracteres'],
     },
-    number: {
+    code: {
       type: Number,
       unique: [true, 'Número do produto já existente'],
       required: [true, 'Por favor, insira o número do produto'],
@@ -72,6 +72,13 @@ const productSchema = new mongoose.Schema(
       ],
     },
     image: [{ type: String }],
+    sub_category: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'SubCategory',
+        required: [true, 'Por favor, associe o produto a uma subcategoria'],
+      },
+    ],
     category: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Category',

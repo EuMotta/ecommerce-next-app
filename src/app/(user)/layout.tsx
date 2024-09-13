@@ -2,6 +2,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
+import UserButton from '@/components/auth/user-button';
 import Logo from '@/components/logo';
 import NavLink from '@/components/navbar/nav-link';
 import ToggleNotifications from '@/components/navbar/toggle-notifications';
@@ -13,19 +14,11 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { ThemeToggle } from '@/components/ui/theme-button';
-import { CircleUser, Menu, Package2, Search } from 'lucide-react';
+import { Menu, Package2, Search } from 'lucide-react';
 
 import { ChildrenProps } from '../../../@Types/global';
 
@@ -132,22 +125,7 @@ export default function Dashboard({ children }: ChildrenProps) {
               </div>
             </form>
           </div>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="secondary" size="icon" className="rounded-full">
-                <CircleUser className="h-5 w-5" />
-                <span className="sr-only">Toggle user menu</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuItem>Support</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <UserButton />
         </header>
         <main className="flex-1">
           <ScrollArea className="h-[calc(100vh-4rem)] px-4 lg:gap-6 lg:p-6">
