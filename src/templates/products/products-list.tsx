@@ -1,5 +1,5 @@
+'use client';
 import { useSearchParams } from 'next/navigation';
-import React from 'react';
 
 import { PaginationWithLinks } from '@/components/pagination';
 import ProductCard from '@/components/product/product-card';
@@ -11,6 +11,11 @@ const ProductList = () => {
   const searchParams = useSearchParams();
 
   const per_page = z.coerce.number().parse(searchParams.get('per_page') ?? 5);
+  const category = z.coerce.string().parse(searchParams.get('category') ?? '');
+  const sub_category = z.coerce
+    .string()
+    .parse(searchParams.get('sub_category') ?? '');
+
   const page = z.coerce.number().parse(searchParams.get('page') ?? 1);
   const {
     data: products,
@@ -20,6 +25,8 @@ const ProductList = () => {
   } = useGetProducts({
     page,
     per_page,
+    category,
+    sub_category,
   });
   console.log(products);
   const pageSizeOptions = [5, 10, 15, 20];

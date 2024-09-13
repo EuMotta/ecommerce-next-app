@@ -17,8 +17,22 @@ export const data = {
   category: [
     {
       _id: '66dcc4ab55c8d7a840dbbd64',
-      name: 'Electronics',
+      name: 'Electronicos',
       description: 'Various electronic devices and gadgets.',
+      created_at: new Date(),
+    },
+    {
+      _id: '66dcc4ab55c8d7a840dbbd67',
+      name: 'Tenis',
+      description:
+        'Clothing and footwear designed for sports and physical activities.',
+      created_at: new Date(),
+    },
+    {
+      _id: '66dcc4ab55c8d7a840dbbd66',
+      name: 'Residencial',
+      description:
+        'Appliances for home use, including refrigerators, washing machines, and more.',
       created_at: new Date(),
     },
   ],
@@ -28,6 +42,21 @@ export const data = {
       parent_id: '66dcc4ab55c8d7a840dbbd64',
       name: 'Smartphones',
       description: 'Latest models of smartphones.',
+      created_at: new Date(),
+    },
+    {
+      _id: '66dcc4ff55c8d7a840dbbd72',
+      parent_id: '66dcc4ab55c8d7a840dbbd67',
+      name: 'Tênis de Corrida',
+      description: 'Footwear specifically designed for running and jogging.',
+      created_at: new Date(),
+    },
+    {
+      _id: '66dcc4ff55c8d7a840dbbd71',
+      parent_id: '66dcc4ab55c8d7a840dbbd66',
+      name: 'Refrigeradores',
+      description:
+        'Various types of refrigerators including top-freezer, bottom-freezer, and side-by-side models.',
       created_at: new Date(),
     },
     {
@@ -43,6 +72,30 @@ export const data = {
       _id: '66de34921957e148d7440f01',
       type: 'Cor',
       value: 'Black',
+      created_at: new Date(),
+    },
+    {
+      _id: '66de34921957e148d744ef07',
+      type: 'Cor',
+      value: 'Inox',
+      created_at: new Date(),
+    },
+    {
+      _id: '66de34921957e148d7440f08',
+      type: 'Tamanho',
+      value: '500L',
+      created_at: new Date(),
+    },
+    {
+      _id: '66de34921957e148d7440f09',
+      type: 'Cor',
+      value: 'Preto com Azul',
+      created_at: new Date(),
+    },
+    {
+      _id: '66de34921957e148d7440f10',
+      type: 'Tamanho',
+      value: '42',
       created_at: new Date(),
     },
     {
@@ -121,7 +174,98 @@ export const data = {
       slug: 'iphone-13-the-new-iphone-13-with-a15-chip.',
       summary: 'The new iPhone 13 with A15 chip.',
       cover: '/products/coverphone.png',
-      category: ['66dcc4ab55c8d7a840dbbd64'],
+      sub_category: ['66dcc4ff55c8d7a840dbbd6e'],
+      category: '66dcc4ff55c8d7a840dbbd6e',
+      created_at: new Date(),
+    },
+    {
+      _id: '66dcc5c1d74d8f522ccb8e24',
+      name: 'Geladeira Frost Free',
+      code: 2,
+      description:
+        'A Geladeira Frost Free é ideal para quem busca praticidade e eficiência energética. Com tecnologia de resfriamento uniforme e design moderno, é perfeita para qualquer cozinha.',
+      image: ['/products/fridge.png'],
+      weight: 75000,
+      warranty: 5,
+      technicalSpecifications: {
+        characteristics:
+          'Geladeira com tecnologia Frost Free e eficiência energética avançada.',
+        specifications: [
+          {
+            title: 'Capacidade Total',
+            description: ['500 litros'],
+          },
+          {
+            title: 'Tipo de Refrigeração',
+            description: ['Frost Free'],
+          },
+          {
+            title: 'Consumo de Energia',
+            description: ['Classe A++'],
+          },
+          {
+            title: 'Número de Portas',
+            description: ['2 portas'],
+          },
+          {
+            title: 'Recursos Adicionais',
+            description: ['Dispensador de água', 'Prateleiras ajustáveis'],
+          },
+        ],
+      },
+      price: 1200,
+      skus: ['66de35051957e148d7440f23'],
+      slug: 'geladeira-frost-free-com-tecnologia-avancada',
+      summary:
+        'Geladeira Frost Free com capacidade de 500 litros e eficiência energética A++.',
+      cover: '/products/coverfridge.png',
+      sub_category: ['66dcc4ff55c8d7a840dbbd71'],
+      category: '66dcc4ab55c8d7a840dbbd66',
+      created_at: new Date(),
+    },
+    {
+      _id: '66dcc5c1d74d8f522ccb8e25',
+      name: 'Tênis de Corrida Ultraleve',
+      code: 3,
+      description:
+        'O Tênis de Corrida Ultraleve é ideal para corredores que buscam conforto e desempenho. Com tecnologia de amortecimento avançada e design aerodinâmico, é a escolha perfeita para treinos e competições.',
+      image: ['/products/running_shoes.png'],
+      weight: 250,
+      warranty: 3,
+      technicalSpecifications: {
+        characteristics:
+          'Tênis projetado para alta performance em corridas, com foco em leveza e conforto.',
+        specifications: [
+          {
+            title: 'Material',
+            description: ['Malha respirável', 'Solado em borracha'],
+          },
+          {
+            title: 'Amortecimento',
+            description: ['Tecnologia de amortecimento em gel'],
+          },
+          {
+            title: 'Peso',
+            description: ['250 gramas por pé'],
+          },
+          {
+            title: 'Tamanhos Disponíveis',
+            description: ['36 a 44'],
+          },
+          {
+            title: 'Cor',
+            description: ['Preto com detalhes em azul'],
+          },
+        ],
+      },
+      price: 150,
+      skus: ['66de35051957e148d7440f24'],
+      slug: 'tenis-de-corrida-ultraleve-com-amortecimento',
+      summary:
+        'Tênis de Corrida Ultraleve com tecnologia de amortecimento e material respirável.',
+      cover: '/products/coverrunning_shoes.png',
+      sub_category: ['66dcc4ff55c8d7a840dbbd72'],
+      category: '66dcc4ab55c8d7a840dbbd67',
       created_at: new Date(),
     },
   ],
@@ -133,6 +277,24 @@ export const data = {
       color: '66de34921957e148d7440f01',
       sku: 'IP13-BLK-128GB',
       quantity: 50,
+      created_at: '2024-09-08T00:00:00Z',
+    },
+    {
+      _id: '66de35051957e148d7440f23',
+      product: '66dcc5c1d74d8f522ccb8e24',
+      size: '66de34921957e148d7440f08',
+      color: '66de34921957e148d744ef07',
+      sku: 'FRIDGE-500L-A++',
+      quantity: 30,
+      created_at: '2024-09-08T00:00:00Z',
+    },
+    {
+      _id: '66de35051957e148d7440f24',
+      product: '66dcc5c1d74d8f522ccb8e25',
+      size: '66de34921957e148d7440f10',
+      color: '66de34921957e148d7440f09',
+      sku: 'RUNSHOE-250G-BLUE',
+      quantity: 75,
       created_at: '2024-09-08T00:00:00Z',
     },
     {

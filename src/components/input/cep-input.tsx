@@ -13,7 +13,7 @@ const CepInput = React.forwardRef<HTMLInputElement, any>(
               {...inputProps}
               ref={ref}
               id="cep"
-              placeholder="21212-121"
+              placeholder="00000-000"
               className="w-full"
             />
           )}

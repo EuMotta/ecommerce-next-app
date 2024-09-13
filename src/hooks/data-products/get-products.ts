@@ -6,6 +6,8 @@ export function useGetProducts(
   filters: {
     page?: number;
     per_page?: number;
+    category?: string;
+    sub_category?: string;
   } = {},
 ): UseQueryResult<HookProduct, Error> {
   return useQuery({

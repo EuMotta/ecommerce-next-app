@@ -6,11 +6,18 @@ export async function getProducts(
   filters: {
     page?: number;
     per_page?: number;
+    category?: string;
+    sub_category?: string;
   } = {},
 ) {
   try {
     const response = await axios.get('/api/data/products', {
-      params: { page: filters.page, per_page: filters.per_page },
+      params: {
+        page: filters.page,
+        per_page: filters.per_page,
+        category: filters.category,
+        sub_category: filters.sub_category,
+      },
     });
     return response.data;
   } catch (error) {

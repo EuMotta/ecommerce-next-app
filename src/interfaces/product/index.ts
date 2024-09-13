@@ -12,7 +12,7 @@ export interface Product extends Timestamps {
   summary: string;
   slug: string;
   price: number;
-  category: Category;
+  sub_category: Category;
   skus: Sku[];
   cover: string;
   category_id: string;
