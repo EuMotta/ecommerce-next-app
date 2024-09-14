@@ -5,7 +5,7 @@ const productAttributeSchema = new mongoose.Schema(
     type: {
       type: String,
       maxlength: [255, 'O tipo deve ter no máximo 50 caracteres'],
-      enum: ['Cor', 'Tamanho', 'Tipo'],
+      enum: ['cor', 'tamanho'],
     },
     value: {
       type: String,

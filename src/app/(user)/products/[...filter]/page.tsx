@@ -1,10 +1,11 @@
 import Container from '@/components/common/container';
 import ProductListDynamic from '@/templates/products/products-list-dynamic';
 
-const Page = () => {
+const Page = ({ params }: { params: { filter: string[] } }) => {
+  console.log(params);
   return (
     <Container>
-      <ProductListDynamic />
+      <ProductListDynamic filter={params} />
     </Container>
   );
 };

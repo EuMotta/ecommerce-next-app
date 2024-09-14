@@ -8,17 +8,16 @@ import mongoose from 'mongoose';
 
 export class ProductsService {
   async getProducts(params: any = {}) {
+    await db.connect();
     const limit = parse.getNumberIfPositive(params.limit) || 10;
     const offset = parse.getNumberIfPositive(params.offset) || 0;
     const fieldsArray = this.getStringToArray(params.fields);
     const projectQuery = this.getProjectQuery(fieldsArray);
-    const sortQuery = this.getSortQuery(params);
-    const matchQuery = this.getMatchQuery(params);
+    const sortQuery = this.getSortQuery(params.sort);
+    const matchQuery = await this.getMatchQuery(params);
     const matchTextQuery = this.getMatchTextQuery(params);
 
-    await db.connect();
-
-    const aggregationPipeline: any[] = [];
+    const aggregationPipeline = [];
 
     if (matchTextQuery || matchQuery) {
       const combinedMatchQuery = { ...matchTextQuery, ...matchQuery };
@@ -26,13 +25,6 @@ export class ProductsService {
     }
 
     aggregationPipeline.push({ $project: projectQuery });
-
-    if (sortQuery && Object.keys(sortQuery).length > 0) {
-      aggregationPipeline.push({ $sort: sortQuery });
-    }
-
-    aggregationPipeline.push({ $skip: offset });
-    aggregationPipeline.push({ $limit: limit });
 
     aggregationPipeline.push({
       $lookup: {
@@ -49,10 +41,11 @@ export class ProductsService {
         preserveNullAndEmptyArrays: true,
       },
     });
+
     aggregationPipeline.push({
       $lookup: {
         from: 'categories',
-        localField: 'category',
+        localField: 'sub_category.parent_id',
         foreignField: '_id',
         as: 'category',
       },
@@ -114,6 +107,7 @@ export class ProductsService {
         },
       });
     }
+
     if (params.category) {
       aggregationPipeline.push({
         $match: {
@@ -121,17 +115,39 @@ export class ProductsService {
         },
       });
     }
+
+    /* teste */
+    aggregationPipeline.push({
+      $group: {
+        _id: '$_id',
+        name: { $first: '$name' },
+        description: { $first: '$description' },
+        code: { $first: '$code' },
+        slug: { $first: '$slug' },
+        skus: { $push: '$skus' },
+        price: { $first: '$price' },
+        cover: { $first: '$cover' },
+        weight: { $first: '$weight' },
+        image: { $first: '$image' },
+        sub_category: { $first: '$sub_category' },
+        category: { $first: '$category' },
+      },
+    });
+    /* teste */
+    if (Object.keys(sortQuery).length > 0) {
+      aggregationPipeline.push({ $sort: sortQuery });
+    }
+    aggregationPipeline.push({ $skip: offset });
+    aggregationPipeline.push({ $limit: limit });
+
     const [products, totalCountResult] = await Promise.all([
       Product.aggregate(aggregationPipeline).exec(),
-      Product.countDocuments(await matchQuery).exec(),
+      Product.countDocuments(matchQuery).exec(),
     ]);
-
     await db.disconnect();
 
-    const total_count = totalCountResult || 0;
-
     return {
-      total_count: total_count,
+      total_count: totalCountResult || 0,
       data: products,
     };
   }
@@ -218,8 +234,8 @@ export class ProductsService {
   }
 
   /* Gera um objeto de ordenação para uma consulta no mongo com base no parâmetro fornecido. */
-  getSortQuery(params: any) {
-    const sort = params.sort || '';
+  getSortQuery(sortParam: any) {
+    const sort = sortParam || '';
     if (sort.length > 0) {
       const fields = sort.split(',');
       return Object.assign(
@@ -233,14 +249,17 @@ export class ProductsService {
         })),
       );
     }
-    return {};
+
+    return { name: 1 };
   }
 
   async getSubCategoryIdByName(
     name: string,
   ): Promise<mongoose.Types.ObjectId | null> {
-    const subCategory = await SubCategory.findOne({ name }).exec();
-    console.log(subCategory);
+    const subCategory = await SubCategory.findOne({
+      name: { $regex: new RegExp(`^${name}$`, 'i') },
+    }).exec();
+
     return subCategory ? subCategory._id : null;
   }
 
@@ -248,7 +267,7 @@ export class ProductsService {
     name: string,
   ): Promise<mongoose.Types.ObjectId | null> {
     const category = await Category.findOne({ name }).exec();
-    return category ? category._id.toString() : null;
+    return category ? category._id : null;
   }
 
   async getSubCategoriesByCategory(
@@ -263,21 +282,21 @@ export class ProductsService {
   /* Exemplo de método para construir um matchQuery (filtro) */
   async getMatchQuery(params: any) {
     const query: any = {};
-    if (params.sub_category && !params.category) {
+    if (params.sub_category && params.category) {
       const subCategoryId = await this.getSubCategoryIdByName(
         params.sub_category,
       );
+
       if (subCategoryId) {
-        query.sub_category = {
-          $in: [subCategoryId],
-        };
+        query.sub_category = { $in: [subCategoryId] };
       }
     }
 
     if (!params.sub_category && params.category) {
       const categoryId = await this.getCategoryIdByName(params.category);
       if (categoryId) {
-        query.category = categoryId;
+        const subCategories = await this.getSubCategoriesByCategory(categoryId);
+        query.sub_category = { $in: subCategories };
       }
     }
 
@@ -293,7 +312,7 @@ export class ProductsService {
   /*  método para construir um matchTextQuery (filtro de texto) */
   getMatchTextQuery(params: any) {
     if (params.search) {
-      return { $text: { $search: params.search } };
+      return { $text: { $search: `"${params.search}"` } };
     }
     return null;
   }

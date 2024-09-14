@@ -1,5 +1,5 @@
 'use client';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -16,96 +16,101 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { ChevronDown, Monitor } from 'lucide-react';
 
+import GlobalSearch from './global-search';
+
 export default function CategoryFilter() {
-  const searchParams = useSearchParams();
   const router = useRouter();
-
-  const handleCategoryChange = (category: string, subcategory?: string) => {
-    if (subcategory) {
-      const updatedParams = new URLSearchParams(
-        searchParams as unknown as URLSearchParams,
-      );
-      updatedParams.delete('category');
-      updatedParams.set('sub_category', subcategory);
-      router.push(`?${updatedParams.toString()}`);
-    } else {
-      const updatedParams = new URLSearchParams(
-        searchParams as unknown as URLSearchParams,
-      );
-      updatedParams.delete('sub_category');
-      updatedParams.set('category', category);
-      router.push(`?${updatedParams.toString()}`);
-    }
+  const pathname = usePathname();
+  const handleCategoryChange = (category: string, sub_category?: string) => {
+    if (category && sub_category)
+      router.push(`/products/${category}/${sub_category}`);
+    if (category && !sub_category) router.push(`/products/${category}`);
   };
-
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline">
-          Categorias
-          <ChevronDown className="-mr-1 ml-2 size-4" />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>Categorias</DropdownMenuLabel>
-        <DropdownMenuSeparator />
+    <div className="m-5 flex gap-5">
+      <Button variant="outline" onClick={() => router.push('/products')}>
+        Todos os produtos
+      </Button>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="outline">
+            Categorias
+            <ChevronDown className="-mr-1 ml-2 size-4" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="w-56">
+          <DropdownMenuLabel>Todas</DropdownMenuLabel>
+          <DropdownMenuSeparator />
 
-        <DropdownMenuSub>
-          <DropdownMenuSubTrigger
-            onClick={() => handleCategoryChange('Electronicos')}
-          >
-            <Monitor className="mr-2 size-4" />
-            <span>Eletrônicos</span>
-          </DropdownMenuSubTrigger>
-          <DropdownMenuPortal>
-            <DropdownMenuSubContent>
-              <DropdownMenuItem
-                onClick={() =>
-                  handleCategoryChange('Electronicos', 'Smartphones')
-                }
-              >
-                Celulares
-              </DropdownMenuItem>
-            </DropdownMenuSubContent>
-          </DropdownMenuPortal>
-        </DropdownMenuSub>
-        <DropdownMenuSub>
-          <DropdownMenuSubTrigger onClick={() => handleCategoryChange('Tenis')}>
-            <Monitor className="mr-2 size-4" />
-            <span>Tenis</span>
-          </DropdownMenuSubTrigger>
-          <DropdownMenuPortal>
-            <DropdownMenuSubContent>
-              <DropdownMenuItem
-                onClick={() => handleCategoryChange('Tenis', 'Corrida')}
-              >
-                Corrida
-              </DropdownMenuItem>
-            </DropdownMenuSubContent>
-          </DropdownMenuPortal>
-        </DropdownMenuSub>
-        <DropdownMenuSub>
-          <DropdownMenuSubTrigger
-            onClick={() => handleCategoryChange('Residencial')}
-          >
-            <Monitor className="mr-2 size-4" />
-            <span>Residencial</span>
-          </DropdownMenuSubTrigger>
-          <DropdownMenuPortal>
-            <DropdownMenuSubContent>
-              <DropdownMenuItem
-                onClick={() =>
-                  handleCategoryChange('Residencial', 'Refrigeradores')
-                }
-              >
-                Refrigeradores
-              </DropdownMenuItem>
-            </DropdownMenuSubContent>
-          </DropdownMenuPortal>
-        </DropdownMenuSub>
+          <DropdownMenuSub>
+            <DropdownMenuSubTrigger
+              onClick={() => handleCategoryChange('eletronicos')}
+            >
+              <Monitor className="mr-2 size-4" />
+              <span>Eletrônicos</span>
+            </DropdownMenuSubTrigger>
+            <DropdownMenuPortal>
+              <DropdownMenuSubContent>
+                <DropdownMenuItem
+                  onClick={() =>
+                    handleCategoryChange('eletronicos', 'smartphones')
+                  }
+                >
+                  Smartphones
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() =>
+                    handleCategoryChange('eletronicos', 'teclados')
+                  }
+                >
+                  Teclados
+                </DropdownMenuItem>
+              </DropdownMenuSubContent>
+            </DropdownMenuPortal>
+          </DropdownMenuSub>
+          <DropdownMenuSub>
+            <DropdownMenuSubTrigger
+              onClick={() => handleCategoryChange('tenis')}
+            >
+              <Monitor className="mr-2 size-4" />
+              <span>Tenis</span>
+            </DropdownMenuSubTrigger>
+            <DropdownMenuPortal>
+              <DropdownMenuSubContent>
+                <DropdownMenuItem
+                  onClick={() =>
+                    handleCategoryChange('tenis', 'tenis-de-corrida')
+                  }
+                >
+                  Corrida
+                </DropdownMenuItem>
+              </DropdownMenuSubContent>
+            </DropdownMenuPortal>
+          </DropdownMenuSub>
+          <DropdownMenuSub>
+            <DropdownMenuSubTrigger
+              onClick={() => handleCategoryChange('residencial')}
+            >
+              <Monitor className="mr-2 size-4" />
+              <span>Residencial</span>
+            </DropdownMenuSubTrigger>
+            <DropdownMenuPortal>
+              <DropdownMenuSubContent>
+                <DropdownMenuItem
+                  onClick={() =>
+                    handleCategoryChange('residencial', 'refrigeradores')
+                  }
+                >
+                  Refrigeradores
+                </DropdownMenuItem>
+              </DropdownMenuSubContent>
+            </DropdownMenuPortal>
+          </DropdownMenuSub>
 
-        <DropdownMenuSeparator />
-      </DropdownMenuContent>
-    </DropdownMenu>
+          <DropdownMenuSeparator />
+        </DropdownMenuContent>
+      </DropdownMenu>
+      <GlobalSearch path={pathname} />
+    </div>
   );
 }

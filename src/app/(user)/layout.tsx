@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 import UserButton from '@/components/auth/user-button';
+import GlobalSearch from '@/components/filter/global-search';
 import Logo from '@/components/logo';
 import NavLink from '@/components/navbar/nav-link';
 import ToggleNotifications from '@/components/navbar/toggle-notifications';
@@ -14,11 +15,10 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { ThemeToggle } from '@/components/ui/theme-button';
-import { Menu, Package2, Search } from 'lucide-react';
+import { Menu, Package2 } from 'lucide-react';
 
 import { ChildrenProps } from '../../../@Types/global';
 
@@ -113,18 +113,7 @@ export default function Dashboard({ children }: ChildrenProps) {
               </div>
             </SheetContent>
           </Sheet>
-          <div className="w-full flex-1">
-            <form>
-              <div className="relative">
-                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                <Input
-                  type="search"
-                  placeholder="Search products..."
-                  className="w-full appearance-none bg-background pl-8 shadow-none md:w-2/3 lg:w-1/3"
-                />
-              </div>
-            </form>
-          </div>
+          <GlobalSearch />
           <UserButton />
         </header>
         <main className="flex-1">

@@ -8,6 +8,7 @@ export async function getProducts(
     per_page?: number;
     category?: string;
     sub_category?: string;
+    search?: string;
   } = {},
 ) {
   try {
@@ -17,6 +18,7 @@ export async function getProducts(
         per_page: filters.per_page,
         category: filters.category,
         sub_category: filters.sub_category,
+        search: filters.search,
       },
     });
     return response.data;

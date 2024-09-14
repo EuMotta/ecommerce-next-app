@@ -1,4 +1,5 @@
 'use client';
+
 import { useSearchParams } from 'next/navigation';
 
 import { PaginationWithLinks } from '@/components/pagination';
@@ -7,16 +8,15 @@ import SkeletonCards from '@/components/skeleton/skeleton-cards';
 import { useGetProducts } from '@/hooks/data-products/get-products';
 import { z } from 'zod';
 
-const ProductList = () => {
+const ProductListDynamic = ({ filter }: any) => {
   const searchParams = useSearchParams();
-
-  const per_page = z.coerce.number().parse(searchParams.get('per_page') ?? 5);
-  const category = z.coerce.string().parse(searchParams.get('category') ?? '');
-  const sub_category = z.coerce
-    .string()
-    .parse(searchParams.get('sub_category') ?? '');
-
+  const per_page = z.coerce.number().parse(searchParams.get('per_page') ?? 10);
   const page = z.coerce.number().parse(searchParams.get('page') ?? 1);
+  const search = z.coerce.string().parse(searchParams.get('search') ?? '');
+  console.log(filter);
+  const category = filter?.filter?.[0] ?? '';
+  const sub_category = filter?.filter?.[1] ?? '';
+
   const {
     data: products,
     isLoading,
@@ -27,9 +27,11 @@ const ProductList = () => {
     per_page,
     category,
     sub_category,
+    search,
   });
-  console.log(products);
+
   const pageSizeOptions = [5, 10, 15, 20];
+
   return (
     <>
       {isLoading && (
@@ -60,4 +62,4 @@ const ProductList = () => {
   );
 };
 
-export default ProductList;
+export default ProductListDynamic;

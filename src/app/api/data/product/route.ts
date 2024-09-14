@@ -7,7 +7,6 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
 
   const slug = searchParams.get('slug') || 'no-slug';
-  console.log(slug);
   try {
     const products = await product.getSingleProduct(slug);
     return NextResponse.json(products);

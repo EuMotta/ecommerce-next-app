@@ -72,18 +72,12 @@ const productSchema = new mongoose.Schema(
       ],
     },
     image: [{ type: String }],
-    sub_category: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'SubCategory',
-        required: [true, 'Por favor, associe o produto a uma subcategoria'],
-      },
-    ],
-    category: {
+    sub_category: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Category',
-      required: [true, 'Por favor, associe o produto a uma categoria'],
+      ref: 'SubCategory',
+      required: [true, 'Por favor, associe o produto a uma subcategoria'],
     },
+
     deletedAt: {
       type: Date,
     },
@@ -92,6 +86,6 @@ const productSchema = new mongoose.Schema(
     timestamps: true,
   },
 );
-
+productSchema.index({ name: 'text', description: 'text' });
 export default mongoose.models.Product ||
   mongoose.model('Product', productSchema);
