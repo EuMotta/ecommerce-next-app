@@ -1,4 +1,5 @@
 import { Category } from '../category';
+import { Company } from '../company';
 import { HTTP } from '../http';
 import { Timestamps } from '../mongodb';
 import { Sku } from '../sku';
@@ -11,10 +12,12 @@ export interface Product extends Timestamps {
   technicalSpecifications: TechnicalSpecifications;
   summary: string;
   slug: string;
+  code: number;
   price: number;
   sub_category: Category;
   skus: Sku[];
   cover: string;
+  company: Company;
   category_id: string;
 }
 export interface TechnicalSpecifications {

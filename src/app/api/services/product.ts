@@ -4,6 +4,7 @@ import Category from '@/models/category/Category';
 import SubCategory from '@/models/category/SubCategory';
 import Product from '@/models/product/Product';
 import ProductSKU from '@/models/product/ProductSKU';
+import Company from '@/models/seller/Company';
 import mongoose from 'mongoose';
 
 export class ProductsService {
@@ -38,6 +39,21 @@ export class ProductsService {
     aggregationPipeline.push({
       $unwind: {
         path: '$sub_category',
+        preserveNullAndEmptyArrays: true,
+      },
+    });
+    aggregationPipeline.push({
+      $lookup: {
+        from: 'companies',
+        localField: 'company',
+        foreignField: '_id',
+        as: 'company',
+      },
+    });
+
+    aggregationPipeline.push({
+      $unwind: {
+        path: '$company',
         preserveNullAndEmptyArrays: true,
       },
     });
@@ -84,6 +100,7 @@ export class ProductsService {
         price: 1,
         cover: 1,
         weight: 1,
+        company: 1,
         image: 1,
         sub_category: {
           description: 1,
@@ -152,11 +169,11 @@ export class ProductsService {
     };
   }
 
-  async getSingleProduct(slug: string) {
+  async getSingleProduct(code: number) {
     try {
       await db.connect();
 
-      const product = await Product.findOne({ slug })
+      const product = await Product.findOne({ code })
         .populate({
           path: 'skus',
           model: ProductSKU,
@@ -166,12 +183,20 @@ export class ProductsService {
           model: SubCategory,
           select: 'name slug',
         })
+        .populate({
+          path: 'company',
+          model: Company,
+          select: 'corporate_name logo company_scores',
+        })
         .exec();
 
       if (!product) {
         return { product: null, related_products: [] };
       }
-      const related_products = await this.getRelatedProducts(product);
+      const related_products = await this.getRelatedProducts(
+        product.sub_category,
+        product.code,
+      );
       return { product, related_products };
     } catch (error) {
       console.error('Erro ao efetuar o fetch em services:', error);
@@ -187,11 +212,11 @@ export class ProductsService {
   }
 
   /* Gera uma lista de objetos relacionados ao produto */
-  async getRelatedProducts(product: any) {
+  async getRelatedProducts(sub_category: string, code: string) {
     try {
       const relatedProducts = await Product.find({
-        code: { $ne: product.code },
-        category: { $in: product.category },
+        code: { $ne: code },
+        sub_category: { $in: sub_category },
       })
         .populate({
           path: 'skus',
@@ -213,6 +238,7 @@ export class ProductsService {
       name: 1,
       description: 1,
       skus: 1,
+      company: 1,
       slug: 1,
       cover: 1,
       category: 1,

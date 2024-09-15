@@ -1,6 +1,6 @@
 import db from '@/lib/mongodb';
 import Product from '@/models/product/Product';
-import Rating from '@/models/rating/Rating';
+import Rating from '@/models/review/Review';
 
 export class ReviewsService {
   async getReview(id: any = {}, limit: number) {
@@ -27,32 +27,34 @@ export class ReviewsService {
 
   async createReview(
     userId: string,
-    slug: string,
+    code: string,
     rating: number,
     comment: string,
+    delivery_time: string,
   ) {
     try {
       await db.connect();
 
-      const product = await Product.findOne({ slug });
+      const product = await Product.findOne({ code });
       if (!product) {
         throw new Error('Produto não encontrado');
       }
-      const alreadyRated = await Rating.exists({
+      /*       const alreadyRated = await Rating.exists({
         user: userId,
         product: product._id,
-      });
+      }); */
 
-      if (alreadyRated) {
+      /*       if (alreadyRated) {
         throw new Error('Você já avaliou este produto');
-      }
-
+      } */
       const review = new Rating({
         user: userId,
         product: product._id,
         rating,
         comment,
+        delivery_time,
       });
+
       await review.save();
 
       return review;

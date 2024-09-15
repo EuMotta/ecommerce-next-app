@@ -6,6 +6,7 @@ const CartSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
       required: [true, 'Por favor, associe o carrinho a um usuário'],
+      unique: [true, 'este usuário já tem um carrinho'],
     },
     total: {
       type: Number,

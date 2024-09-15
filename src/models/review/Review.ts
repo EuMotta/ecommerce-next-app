@@ -19,6 +19,12 @@ const reviewSchema = new mongoose.Schema(
       min: [1, 'A nota deve ser no mínimo 1'],
       max: [5, 'A nota deve ser no máximo 5'],
     },
+    delivery_time: {
+      type: Number,
+      required: [true, 'A nota de entrega é obrigatória'],
+      min: [1, 'A nota deve ser no mínimo 1'],
+      max: [5, 'A nota deve ser no máximo 5'],
+    },
     comment: {
       type: String,
       maxlength: [500, 'O comentário pode ter no máximo 500 caracteres'],

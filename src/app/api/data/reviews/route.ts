@@ -2,16 +2,17 @@ import { getServerSession } from 'next-auth';
 import { NextRequest, NextResponse } from 'next/server';
 
 import { authOptions } from '../../auth/[...nextauth]/authOptions';
+import { CompanyServices } from '../../services/company';
 import { ReviewsService } from '../../services/rating';
 
 const reviews = new ReviewsService();
+const company = new CompanyServices();
 
 export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+
+  const id = searchParams.get('id');
   try {
-    const { searchParams } = new URL(request.url);
-
-    const id = searchParams.get('id') || '';
-
     const limit = searchParams.get('limit')
       ? parseInt(searchParams.get('limit')!, 10)
       : 10;
@@ -26,18 +27,34 @@ export async function GET(request: Request) {
 
 export async function POST(request: NextRequest) {
   try {
-    const { slug, rating, comment } = await request.json();
+    const { code, rating, comment, delivery_time, companyId } =
+      await request.json();
+
     const session = await getServerSession(authOptions);
 
     if (!session || !session.user) {
       return NextResponse.json({ message: 'Não autenticado' }, { status: 401 });
     }
 
-    if (!slug || rating < 1 || rating > 5) {
+    if (
+      !code ||
+      rating < 1 ||
+      rating > 5 ||
+      delivery_time < 1 ||
+      delivery_time > 5
+    ) {
       return NextResponse.json({ message: 'Dados inválidos' }, { status: 400 });
     }
 
-    await reviews.createReview(session.user._id, slug, rating, comment);
+    await reviews.createReview(
+      session.user._id,
+      code,
+      rating,
+      comment,
+      delivery_time,
+    );
+    await company.updateCompanyScore(companyId, rating, delivery_time);
+
     return NextResponse.json(
       { message: 'Review criada com sucesso' },
       { status: 200 },

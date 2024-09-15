@@ -11,7 +11,7 @@ import { Card, CardContent, CardFooter } from '../ui/card';
 const ProductCard = ({ product }: { product: Product }) => {
   return (
     <Card className="h-[401px] w-64 overflow-hidden rounded-lg border shadow-lg">
-      <Link href={`/product/${product.slug}`}>
+      <Link href={`/product/${product.code}`}>
         <div
           className="relative h-20 w-full bg-cover bg-center"
           style={{

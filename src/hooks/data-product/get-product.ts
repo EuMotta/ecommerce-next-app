@@ -3,10 +3,10 @@ import { ProductPage } from '@/interfaces/product';
 import { useQuery, UseQueryResult } from '@tanstack/react-query';
 
 export function useGetProduct(
-  slug: string,
+  code: string,
 ): UseQueryResult<ProductPage, Error> {
   return useQuery({
-    queryKey: ['get-product', slug],
-    queryFn: () => getProduct(slug),
+    queryKey: ['get-product', code],
+    queryFn: () => getProduct(code),
   });
 }

@@ -10,6 +10,7 @@ import { Loader } from 'lucide-react';
 import { toast } from 'sonner';
 import * as z from 'zod';
 
+import NoData from '../common/no-data';
 import StarRating from '../rating/star';
 import { Button } from '../ui/button';
 import { ScrollArea } from '../ui/scroll-area';
@@ -17,15 +18,23 @@ import { Textarea } from '../ui/textarea';
 import ProductCommentStarRating from './product-comment-star-rating';
 
 const schema = z.object({
-  rating: z.number().min(1).max(5),
-  comment: z.string().min(1, 'Comentário não pode ser vazio'),
+  rating: z
+    .number()
+    .min(1, { message: 'Adicione uma nota' })
+    .max(5, { message: 'A nota máxima é 5' }),
+  delivery_time: z
+    .number()
+    .min(1, { message: 'Adicione uma nota para o tempo de entrega' })
+    .max(5, { message: 'O valor máximo é 5' }),
+  comment: z.string().min(1, { message: 'Comentário não pode ser vazio' }),
 });
 
 type FormData = z.infer<typeof schema>;
 
 interface ProductCommentsProps {
   reviews: Reviews;
-  slug: string;
+  code: string;
+  companyId: string;
   isLoadingRatings: boolean;
   isErrorRatings: boolean | null;
   errorRatings: Error;
@@ -35,7 +44,8 @@ interface ProductCommentsProps {
 }
 
 const ProductComments = ({
-  slug,
+  code,
+  companyId,
   reviews,
   isLoadingRatings,
   isErrorRatings,
@@ -64,7 +74,9 @@ const ProductComments = ({
           const response = await axios.post('/api/data/reviews', {
             rating: data.rating,
             comment: data.comment,
-            slug,
+            code,
+            companyId,
+            delivery_time: data.delivery_time,
           });
           return response.data;
         } catch (error: any) {
@@ -146,25 +158,56 @@ const ProductComments = ({
             </Button>
           )}
           {reviews && reviews.reviews && reviews.reviews.length < 1 && (
-            <span className="text-destructive">Nenhum comentário ainda</span>
+            <NoData
+              image="/stickers/feedback.png"
+              title="Nenhum comentário até agora"
+              subtitle="Seja o primeiro a comentar!"
+            />
           )}
         </div>
       </ScrollArea>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid gap-4">
-          <Controller
-            name="rating"
-            control={control}
-            render={({ field }) => (
-              <ProductCommentStarRating
-                rating={field.value}
-                onChange={(value) => field.onChange(value)}
+          <div className="flex flex-col items-start justify-between gap-6 rounded-lg p-4 shadow md:flex-row md:items-center">
+            <div className="flex flex-col items-start gap-2 md:flex-row md:items-center md:gap-4">
+              <span className="font-medium">Qualidade do produto:</span>
+              <Controller
+                name="rating"
+                control={control}
+                render={({ field }) => (
+                  <ProductCommentStarRating
+                    rating={field.value}
+                    onChange={(value) => field.onChange(value)}
+                  />
+                )}
               />
-            )}
-          />
-          {errors.rating && (
-            <span className="text-destructive">{errors.rating.message}</span>
-          )}
+              {errors.rating && (
+                <span className="text-sm text-destructive">
+                  {errors.rating.message}
+                </span>
+              )}
+            </div>
+
+            <div className="flex flex-col items-start gap-2 md:flex-row md:items-center md:gap-4">
+              <span className="font-medium">Tempo de entrega:</span>
+              <Controller
+                name="delivery_time"
+                control={control}
+                render={({ field }) => (
+                  <ProductCommentStarRating
+                    rating={field.value}
+                    onChange={(value) => field.onChange(value)}
+                  />
+                )}
+              />
+              {errors.delivery_time && (
+                <span className="text-sm text-destructive">
+                  {errors.delivery_time.message}
+                </span>
+              )}
+            </div>
+          </div>
+
           <Controller
             name="comment"
             control={control}

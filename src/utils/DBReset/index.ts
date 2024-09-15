@@ -146,6 +146,7 @@ export const data = {
       slug: 'iphone-114-the-new-iphone-13-with-a15-chip',
       summary: 'The new iPhone 13 with A15 chip.',
       cover: '/products/coverphone.png',
+      company: '66e6397153330e3d00249927',
       sub_category: '66dcc4ff55c8d7a840dbbd6e',
       created_at: '2024-09-13T00:00:00Z',
     },
@@ -158,6 +159,7 @@ export const data = {
       image: ['/products/phone/1.jpeg'],
       weight: 100,
       warranty: 3,
+      company: '66e6397153330e3d00249927',
       technicalSpecifications: {
         characteristics:
           'O iPhone 13 combina design elegante com desempenho excepcional e novas tecnologias:',
@@ -229,6 +231,7 @@ export const data = {
       image: ['/products/phone/2.jpeg'],
       weight: 100,
       warranty: 3,
+      company: '66e6397153330e3d00249927',
       technicalSpecifications: {
         characteristics:
           'O iPhone 10 combina design elegante com desempenho excepcional e novas tecnologias:',
@@ -358,6 +361,7 @@ export const data = {
       skus: ['66de35051957e148d7440f22'],
       slug: 'iphone-112-the-new-iphone-13-with-a15-chip',
       summary: 'The new iPhone 13 with A15 chip.',
+      company: '66e6397153330e3d00249928',
       cover: '/products/coverphone.png',
       sub_category: '66dcc4ff55c8d7a840dbbd6e',
       created_at: '2024-09-13T00:00:00Z',
@@ -365,6 +369,7 @@ export const data = {
     {
       _id: '66dcc5c1d74d8f522ccb8e24',
       name: 'Geladeira Frost Free',
+      company: '66e6397153330e3d00249928',
       code: 21,
       description:
         'A Geladeira Frost Free é ideal para quem busca praticidade e eficiência energética. Com tecnologia de resfriamento uniforme e design moderno, é perfeita para qualquer cozinha.',
@@ -409,6 +414,7 @@ export const data = {
     {
       _id: '66dcc5c1d74d8f522ccb8e11',
       name: 'Cadeira',
+      company: '66e6397153330e3d00249928',
       code: 2,
       description:
         'A Geladeira Frost Free é ideal para quem busca praticidade e eficiência energética. Com tecnologia de resfriamento uniforme e design moderno, é perfeita para qualquer cozinha.',
@@ -453,6 +459,7 @@ export const data = {
     {
       _id: '66dcc5c1d74d8f522ccb8e19',
       name: 'Tênis de Corrida Ultraleve',
+      company: '66e6397153330e3d00249928',
       code: 3,
       description:
         'O Tênis de Corrida Ultraleve é ideal para corredores que buscam conforto e desempenho. Com tecnologia de amortecimento avançada e design aerodinâmico, é a escolha perfeita para treinos e competições.',
@@ -497,6 +504,7 @@ export const data = {
     {
       _id: '66dcc5c1d74d8f522ccb8e26',
       name: 'Tênis Casual Elegante',
+      company: '66e6397153330e3d00249928',
       code: 4,
       description:
         'O Tênis Casual Elegante combina estilo e conforto para uso diário. Ideal para quem busca um look moderno sem abrir mão do conforto.',
@@ -540,6 +548,7 @@ export const data = {
     {
       _id: '66dcc5c1d74d8f522ccb8e27',
       name: 'Tênis de Corrida para Trilhas',
+      company: '66e6397153330e3d00249928',
       code: 5,
       description:
         'O Tênis de Corrida para Trilhas oferece tração e suporte em terrenos acidentados, ideal para aventuras ao ar livre.',
@@ -584,6 +593,7 @@ export const data = {
     {
       _id: '66dcc5c1d74d8f522ccb8e28',
       name: 'Tênis de Corrida para Asfalto',
+      company: '66e6397153330e3d00249928',
       code: 6,
       description:
         'O Tênis de Corrida para Asfalto é ideal para corredores urbanos, oferecendo conforto e suporte em superfícies duras.',
@@ -780,6 +790,7 @@ export const data = {
       user: '66dcabb3d6921148f63c1b70',
       product: '66dcc5c1d74d8f522ccb8e23',
       rating: 4,
+      delivery_time: 2,
       comment:
         'Ótimo produto! A qualidade é excelente e o atendimento ao cliente foi muito bom.',
     },
@@ -787,6 +798,7 @@ export const data = {
       user: '66dcabb3d6921148f63c1b70',
       product: '66dcc5c1d74d8f522ccb8e23',
       rating: 5,
+      delivery_time: 2,
       comment:
         'Produto excelente! Superou minhas expectativas em todos os aspectos.',
     },
@@ -794,6 +806,7 @@ export const data = {
       user: '66dcabb3d6921148f63c1b70',
       product: '66dcc5c1d74d8f522ccb8e23',
       rating: 4,
+      delivery_time: 2,
       comment:
         'Muito bom, mas o envio demorou um pouco mais do que eu esperava.',
     },
@@ -801,12 +814,14 @@ export const data = {
       user: '66dcabb3d6921148f63c1b70',
       product: '66dcc5c1d74d8f522ccb8e23',
       rating: 3,
+      delivery_time: 2,
       comment: 'O produto é bom, mas tive alguns problemas com a instalação.',
     },
     {
       user: '66dcabb3d6921148f63c1b70',
       product: '66dcc5c1d74d8f522ccb8e23',
       rating: 5,
+      delivery_time: 2,
       comment:
         'Excelente! Atendeu a todas as minhas necessidades e é de alta qualidade.',
     },
@@ -814,6 +829,7 @@ export const data = {
       user: '66dcabb3d6921148f63c1b70',
       product: '66dcc5c1d74d8f522ccb8e23',
       rating: 2,
+      delivery_time: 2,
       comment:
         'Infelizmente, o produto chegou com defeito e a experiência não foi boa.',
     },
@@ -821,6 +837,7 @@ export const data = {
       user: '66dcabb3d6921148f63c1b70',
       product: '66dcc5c1d74d8f522ccb8e23',
       rating: 4,
+      delivery_time: 2,
       comment:
         'Bom produto, mas a embalagem poderia ser melhor para proteger o item.',
     },
@@ -828,6 +845,7 @@ export const data = {
       user: '66dcabb3d6921148f63c1b70',
       product: '66dcc5c1d74d8f522ccb8e23',
       rating: 5,
+      delivery_time: 2,
       comment:
         'Muito satisfeito com a compra! O produto é exatamente como descrito.',
     },
@@ -835,6 +853,7 @@ export const data = {
       user: '66dcabb3d6921148f63c1b70',
       product: '66dcc5c1d74d8f522ccb8e23',
       rating: 3,
+      delivery_time: 2,
       comment:
         'O produto é bom, mas a entrega foi lenta e não foi bem comunicada.',
     },
@@ -842,13 +861,96 @@ export const data = {
       user: '66dcabb3d6921148f63c1b70',
       product: '66dcc5c1d74d8f522ccb8e23',
       rating: 4,
+      delivery_time: 2,
       comment: 'Bom produto, mas o manual poderia ser mais detalhado.',
     },
     {
       user: '66dcabb3d6921148f63c1b70',
       product: '66dcc5c1d74d8f522ccb8e23',
       rating: 5,
+      delivery_time: 2,
       comment: 'Produto incrível, com excelente custo-benefício. Recomendo!',
+    },
+  ],
+
+  company: [
+    {
+      _id: '66e6397153330e3d00249927',
+      logo: '/company/logo.svg',
+      cnpj: '15527876094888',
+      corporate_name: 'Fatz',
+      website: 'https://google.de/maecenas/leo.html',
+      social_media: {
+        facebook: 'http://pbs.org/semper/porta/volutpat/quam.xml',
+        instagram: 'http://goodreads.com/suspendisse/potenti/cras.aspx',
+      },
+    },
+    {
+      _id: '66e6397153330e3d00249928',
+      logo: '/company/logo.svg',
+      cnpj: '28968748521439',
+      corporate_name: 'Topicstorm',
+      website: 'https://forbes.com/consequat/lectus/in.js',
+      social_media: {
+        facebook: 'http://de.vu/convallis.html',
+        instagram:
+          'https://ucsd.edu/maecenas/pulvinar/lobortis/est/phasellus.html',
+      },
+    },
+    {
+      logo: '/company/logo.svg',
+      cnpj: '90647813038268',
+      corporate_name: 'Skyvu',
+      website:
+        'https://mapquest.com/diam/id/ornare/imperdiet/sapien/urna/pretium.jpg',
+      social_media: {
+        facebook: 'http://linkedin.com/arcu/adipiscing/molestie/hendrerit.json',
+        instagram: 'http://sourceforge.net/dapibus/nulla.jsp',
+      },
+    },
+    {
+      logo: '/company/logo.svg',
+      cnpj: '73494620658779',
+      corporate_name: 'Chatterbridge',
+      website: 'http://alibaba.com/aliquet/massa/id/lobortis/convallis.js',
+      social_media: {
+        facebook: 'https://bandcamp.com/integer/aliquet/massa/id/lobortis.jsp',
+        instagram:
+          'https://google.cn/hac/habitasse/platea/dictumst/morbi/vestibulum.json',
+      },
+    },
+    {
+      logo: '/company/logo.svg',
+      cnpj: '29349673923601',
+      corporate_name: 'Feedmix',
+      website:
+        'http://bizjournals.com/quis/turpis/sed/ante/vivamus/tortor/duis.aspx',
+      social_media: {
+        facebook: 'https://sakura.ne.jp/posuere/cubilia.jsp',
+        instagram:
+          'https://biblegateway.com/consectetuer/eget/rutrum/at/lorem/integer.aspx',
+      },
+    },
+    {
+      logo: '/company/logo.svg',
+      cnpj: '41709743136747',
+      corporate_name: 'Podcat',
+      website: 'https://bandcamp.com/tincidunt.png',
+      social_media: {
+        facebook: 'https://t.co/consectetuer/eget/rutrum/at/lorem.png',
+        instagram:
+          'http://acquirethisname.com/nunc/viverra/dapibus/nulla/suscipit/ligula/in.aspx',
+      },
+    },
+    {
+      logo: '/company/logo.svg',
+      cnpj: '90848147775670',
+      corporate_name: 'Divape',
+      website: 'http://ca.gov/vel/sem/sed/sagittis.jpg',
+      social_media: {
+        facebook: 'http://sfgate.com/nascetur/ridiculus/mus/vivamus.png',
+        instagram: 'https://bing.com/et/ultrices.js',
+      },
     },
   ],
 };

@@ -12,14 +12,9 @@ import { Bar, BarChart, XAxis, YAxis } from 'recharts';
 
 export const description = 'A mixed bar chart';
 
-const chartData = [
-  { browser: 'chrome', pontos: 275, fill: 'var(--color-chrome)' },
-  { browser: 'safari', pontos: 200, fill: 'var(--color-safari)' },
-];
-
 const chartConfig = {
   pontos: {
-    label: 'Pontuação(0 a 100): ',
+    label: 'Pontuação(1 a 5): ',
   },
   chrome: {
     label: 'Entrega no prazo?',
@@ -31,16 +26,34 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function SellerRatingChart() {
+interface SellerRatingChart {
+  quality: number;
+  delivery_time: number;
+  quantity: number;
+  company_name: string;
+}
+export function SellerRatingChart({
+  quality,
+  delivery_time,
+  quantity,
+  company_name,
+}: SellerRatingChart) {
+  const chartData = [
+    { browser: 'chrome', pontos: quality, fill: 'var(--color-chrome)' },
+    { browser: 'safari', pontos: delivery_time, fill: 'var(--color-safari)' },
+  ];
   return (
     <div>
       <div className="">
         <span className="text-xs text-muted-foreground">
-          Conheça o desempenho da{' '}
+          Como é a{' '}
           <Link href={'/'} className="font-bold uppercase underline">
-            SAMSUNGA
+            {company_name}
           </Link>
+          ?
         </span>
+        <br />
+        <span className="text-xs">Avaliações: ({quantity})</span>
         <ChartContainer config={chartConfig} className="max-h-20 w-full">
           <BarChart
             accessibilityLayer
@@ -61,7 +74,7 @@ export function SellerRatingChart() {
                 chartConfig[value as keyof typeof chartConfig]?.label
               }
             />
-            <XAxis dataKey="pontos" type="number" hide />
+            <XAxis dataKey="pontos" type="number" hide domain={[0, 5]} />
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent hideLabel />}

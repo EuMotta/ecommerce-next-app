@@ -6,9 +6,11 @@ const product = new ProductsService();
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
 
-  const slug = searchParams.get('slug') || 'no-slug';
+  const code = searchParams.get('code')
+    ? parseInt(searchParams.get('code')!, 10)
+    : 0;
   try {
-    const products = await product.getSingleProduct(slug);
+    const products = await product.getSingleProduct(code);
     return NextResponse.json(products);
   } catch (error) {
     console.error(error);

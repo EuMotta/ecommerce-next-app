@@ -77,7 +77,11 @@ const productSchema = new mongoose.Schema(
       ref: 'SubCategory',
       required: [true, 'Por favor, associe o produto a uma subcategoria'],
     },
-
+    company: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Company',
+      required: [true, 'Por favor, associe o produto a uma empresa'],
+    },
     deletedAt: {
       type: Date,
     },

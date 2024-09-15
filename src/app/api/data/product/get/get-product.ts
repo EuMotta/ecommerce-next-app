@@ -2,9 +2,9 @@ import axios, { AxiosError } from 'axios';
 
 import { errorList } from '@/constants';
 
-export async function getProduct(slug: string) {
+export async function getProduct(code: string) {
   try {
-    const response = await axios.get('/api/data/product', { params: { slug } });
+    const response = await axios.get('/api/data/product', { params: { code } });
     return response.data;
   } catch (error) {
     {
