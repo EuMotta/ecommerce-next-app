@@ -10,7 +10,7 @@ import { authOptions } from '../auth/[...nextauth]/authOptions';
 export class CartServices {
   async insertProduct(productId: string, skuId: string) {
     const session = await getServerSession(authOptions);
-
+    await db.connect();
     if (!session || !session.user) {
       throw new Error('Usuário não autenticado');
     }
@@ -40,6 +40,7 @@ export class CartServices {
     cart.total += 1;
 
     await cart.save();
+    await db.disconnect();
   }
 
   async createCart() {
