@@ -32,9 +32,8 @@ export class ReviewsService {
     comment: string,
     delivery_time: string,
   ) {
+    await db.connect();
     try {
-      await db.connect();
-
       const product = await Product.findOne({ code });
       if (!product) {
         throw new Error('Produto não encontrado');
@@ -56,7 +55,7 @@ export class ReviewsService {
       });
 
       await review.save();
-
+      await db.disconnect();
       return review;
     } catch (error) {
       console.error('Erro ao criar o review:', error);

@@ -278,6 +278,7 @@ export class CartServices {
       total_count: total_count,
     };
   }
+
   async updateCartItemQuantity(
     itemId: string,
     action: 'add-quantity' | 'remove-quantity',
@@ -305,6 +306,12 @@ export class CartServices {
         newQuantity = Math.max(0, newQuantity - 1);
       }
 
+      if (newQuantity <= 0) {
+        await this.deleteCartItemCount(itemId);
+        await db.disconnect();
+        return { total_count: 0, message: 'Item removido do carrinho' };
+      }
+
       await CartItem.updateOne(
         { _id: itemId },
         { quantity: newQuantity },
@@ -314,12 +321,36 @@ export class CartServices {
 
       return {
         total_count: newQuantity,
+        message: 'Quantidade atualizada com sucesso',
       };
     } catch (error) {
       await db.disconnect();
       console.error(
         `Erro ao atualizar item do carrinho: ${(error as Error).message}`,
       );
+      throw new Error(`Erro ao atualizar item: ${(error as Error).message}`);
+    }
+  }
+
+  async deleteCartItemCount(_id: string) {
+    try {
+      await CartItem.deleteOne({ _id }).exec();
+    } catch (error) {
+      console.error(
+        `Erro ao deletar item do carrinho: ${(error as Error).message}`,
+      );
+    }
+  }
+  async deleteCartItem(_id: string) {
+    try {
+      await db.connect();
+      await CartItem.deleteOne({ _id }).exec();
+      await db.disconnect();
+    } catch (error) {
+      console.error(
+        `Erro ao deletar item do carrinho: ${(error as Error).message}`,
+      );
+      await db.disconnect();
     }
   }
 }

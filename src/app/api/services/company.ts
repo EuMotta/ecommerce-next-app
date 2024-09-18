@@ -1,3 +1,4 @@
+import db from '@/lib/mongodb';
 import Company from '@/models/seller/Company';
 
 export class CompanyServices {
@@ -6,6 +7,7 @@ export class CompanyServices {
     rating: number,
     delivery_time: number,
   ) {
+    await db.connect();
     const company = await Company.findById(companyId).exec();
     if (!company) {
       throw new Error('Empresa não encontrada');
@@ -33,5 +35,6 @@ export class CompanyServices {
         },
       },
     );
+    await db.disconnect();
   }
 }

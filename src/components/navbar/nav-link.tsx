@@ -20,9 +20,9 @@ const NavLink = () => {
       badge: null,
     },
     {
-      href: '/orders',
+      href: '/cart',
       icon: <ShoppingCart className="h-4 w-4" />,
-      label: 'Orders',
+      label: 'Carrinho',
       badge: (
         <>
           {isLoading && (
