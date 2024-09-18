@@ -16,7 +16,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { ChevronDown, Monitor } from 'lucide-react';
 
-import GlobalSearch from './global-search';
+import LocalSearch from './local-search';
 
 export default function CategoryFilter() {
   const router = useRouter();
@@ -110,7 +110,7 @@ export default function CategoryFilter() {
           <DropdownMenuSeparator />
         </DropdownMenuContent>
       </DropdownMenu>
-      <GlobalSearch path={pathname} />
+      <LocalSearch path={pathname} />
     </div>
   );
 }

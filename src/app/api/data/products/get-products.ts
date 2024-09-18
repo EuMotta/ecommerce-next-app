@@ -9,6 +9,7 @@ export async function getProducts(
     category?: string;
     sub_category?: string;
     search?: string;
+    company?: string;
   } = {},
 ) {
   try {
@@ -19,6 +20,7 @@ export async function getProducts(
         category: filters.category,
         sub_category: filters.sub_category,
         search: filters.search,
+        company: filters.company,
       },
     });
     return response.data;

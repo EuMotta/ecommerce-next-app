@@ -1,17 +1,10 @@
-import { HTTP } from '@/interfaces/http';
 import axios, { AxiosError } from 'axios';
 
 import { errorList } from '@/constants';
 
-export async function getProducts({ page, per_page, search }: HTTP) {
+export async function getCart() {
   try {
-    const response = await axios.get('/api/data/products', {
-      params: {
-        page,
-        per_page,
-        search,
-      },
-    });
+    const response = await axios.get('/api/data/cart');
     return response.data;
   } catch (error) {
     {

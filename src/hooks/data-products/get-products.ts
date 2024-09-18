@@ -9,6 +9,7 @@ export function useGetProducts(
     category?: string;
     search?: string;
     sub_category?: string;
+    company?: string;
   } = {},
 ): UseQueryResult<HookProduct, Error> {
   return useQuery({

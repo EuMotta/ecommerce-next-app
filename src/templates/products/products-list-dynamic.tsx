@@ -13,7 +13,7 @@ const ProductListDynamic = ({ filter }: any) => {
   const per_page = z.coerce.number().parse(searchParams.get('per_page') ?? 10);
   const page = z.coerce.number().parse(searchParams.get('page') ?? 1);
   const search = z.coerce.string().parse(searchParams.get('search') ?? '');
-  console.log(filter);
+  const company = z.coerce.string().parse(searchParams.get('company') ?? '');
   const category = filter?.filter?.[0] ?? '';
   const sub_category = filter?.filter?.[1] ?? '';
 
@@ -28,8 +28,9 @@ const ProductListDynamic = ({ filter }: any) => {
     category,
     sub_category,
     search,
+    company,
   });
-
+  console.log(products);
   const pageSizeOptions = [5, 10, 15, 20];
 
   return (

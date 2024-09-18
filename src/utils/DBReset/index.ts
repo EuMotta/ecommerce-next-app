@@ -953,4 +953,14 @@ export const data = {
       },
     },
   ],
+  deal: [
+    {
+      product: '66dcc5c1d74d8f522ccb8e11',
+      name: 'Desconto especial',
+      discount_amount: 5,
+      discount_type: 'percentage',
+      valid_from: new Date('2024-09-01T00:00:00Z'),
+      valid_to: new Date('2024-12-31T23:59:59Z'),
+    },
+  ],
 };

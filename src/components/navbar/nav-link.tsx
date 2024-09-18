@@ -3,45 +3,53 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import { useGetCart } from '@/hooks/data-cart/get-cart';
 import { Home, LineChart, Package, ShoppingCart } from 'lucide-react';
 
 import { Badge } from '../ui/badge';
-
-const links = [
-  {
-    href: '/dashboard',
-    icon: <Home className="h-4 w-4" />,
-    label: 'Dashboard',
-    badge: null,
-  },
-  {
-    href: '/orders',
-    icon: <ShoppingCart className="h-4 w-4" />,
-    label: 'Orders',
-    badge: (
-      <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-        6
-      </Badge>
-    ),
-  },
-  {
-    href: '/products',
-    icon: <Package className="h-4 w-4" />,
-    label: 'Products',
-    badge: null,
-  },
-
-  {
-    href: '/analytics',
-    icon: <LineChart className="h-4 w-4" />,
-    label: 'Analytics',
-    badge: null,
-  },
-];
+import { Skeleton } from '../ui/skeleton';
 
 const NavLink = () => {
   const pathname = usePathname();
+  const { data, isLoading } = useGetCart();
+  const links = [
+    {
+      href: '/dashboard',
+      icon: <Home className="h-4 w-4" />,
+      label: 'Dashboard',
+      badge: null,
+    },
+    {
+      href: '/orders',
+      icon: <ShoppingCart className="h-4 w-4" />,
+      label: 'Orders',
+      badge: (
+        <>
+          {isLoading && (
+            <Skeleton className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full" />
+          )}
+          {!isLoading && (
+            <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
+              {data?.total_count}
+            </Badge>
+          )}
+        </>
+      ),
+    },
+    {
+      href: '/products',
+      icon: <Package className="h-4 w-4" />,
+      label: 'Products',
+      badge: null,
+    },
 
+    {
+      href: '/analytics',
+      icon: <LineChart className="h-4 w-4" />,
+      label: 'Analytics',
+      badge: null,
+    },
+  ];
   return (
     <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
       {links.map(({ href, icon, label, badge }) => {

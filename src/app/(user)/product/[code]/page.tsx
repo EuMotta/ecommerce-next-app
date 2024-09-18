@@ -6,6 +6,7 @@ import { BsCartXFill } from 'react-icons/bs';
 
 import Container from '@/components/common/container';
 import CepInputForm from '@/components/input/cep-input-form';
+import { AddToCart } from '@/components/product/add-to-cart';
 import { ProductCarousel } from '@/components/product/product-carousel';
 import ProductComments from '@/components/product/product-comments';
 import TechnicalSpecifications from '@/components/product/product-technicalSpecifications';
@@ -23,7 +24,7 @@ import { useGetProductRatings } from '@/hooks/data-product-ratings/get-product-r
 import { useGetProduct } from '@/hooks/data-product/get-product';
 import { Sku } from '@/interfaces/sku';
 import { ProductProvider } from '@/providers/product';
-import { HeartIcon, Plus, ShoppingCartIcon, Tag } from 'lucide-react';
+import { HeartIcon, Tag } from 'lucide-react';
 
 import currencyConverter from '@/utils/Conversions/currencyConverter';
 
@@ -52,7 +53,7 @@ const Page = ({ params }: Params) => {
   const loadMoreComments = () => {
     setCommentsSize((prevSize) => prevSize + 5);
   };
-
+  console.log(products);
   const [selectedSku, setSelectedSku] = useState<Sku | null>(null);
 
   useEffect(() => {
@@ -214,12 +215,7 @@ const Page = ({ params }: Params) => {
                   </div>
                 </div>
                 <div className="flex gap-2">
-                  <Button className="w-full">
-                    <ShoppingCartIcon /> Comprar
-                  </Button>
-                  <Button size={'icon'}>
-                    <Plus />
-                  </Button>
+                  <AddToCart productId={product._id} skuId={selectedSku._id} />
                 </div>
               </div>
             </div>

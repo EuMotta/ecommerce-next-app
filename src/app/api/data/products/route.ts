@@ -12,6 +12,7 @@ export async function GET(request: NextRequest) {
   const category = searchParams.get('category') || '';
   const sub_category = searchParams.get('sub_category') || '';
   const search = searchParams.get('search') || '';
+  const company = searchParams.get('company') || '';
   const limit = searchParams.get('per_page')
     ? parseInt(searchParams.get('per_page')!, 10)
     : 10;
@@ -25,6 +26,7 @@ export async function GET(request: NextRequest) {
       category,
       sub_category,
       search,
+      company,
       sort: 'name',
     });
     return NextResponse.json(products);

@@ -19,6 +19,10 @@ export interface Product extends Timestamps {
   cover: string;
   company: Company;
   category_id: string;
+  price_with_discount: number;
+  average_rating: number;
+  discount_amount: number;
+  total_ratings: number;
 }
 export interface TechnicalSpecifications {
   characteristics: string;
