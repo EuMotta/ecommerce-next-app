@@ -3,15 +3,10 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { useGetCart } from '@/hooks/data-cart/get-cart';
-import { Home, LineChart, Package, ShoppingCart } from 'lucide-react';
-
-import { Badge } from '../ui/badge';
-import { Skeleton } from '../ui/skeleton';
+import { Home, LineChart, Package } from 'lucide-react';
 
 const NavLink = () => {
   const pathname = usePathname();
-  const { data, isLoading } = useGetCart();
   const links = [
     {
       href: '/dashboard',
@@ -19,23 +14,7 @@ const NavLink = () => {
       label: 'Dashboard',
       badge: null,
     },
-    {
-      href: '/cart',
-      icon: <ShoppingCart className="h-4 w-4" />,
-      label: 'Carrinho',
-      badge: (
-        <>
-          {isLoading && (
-            <Skeleton className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full" />
-          )}
-          {!isLoading && (
-            <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-              {data?.total_count}
-            </Badge>
-          )}
-        </>
-      ),
-    },
+
     {
       href: '/products',
       icon: <Package className="h-4 w-4" />,

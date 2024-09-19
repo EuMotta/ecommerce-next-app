@@ -28,9 +28,6 @@ export default function CategoryFilter() {
   };
   return (
     <div className="m-5 flex gap-5">
-      <Button variant="outline" onClick={() => router.push('/products')}>
-        Todos os produtos
-      </Button>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline">

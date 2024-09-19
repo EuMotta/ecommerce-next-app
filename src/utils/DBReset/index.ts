@@ -152,7 +152,7 @@ export const data = {
     },
     {
       _id: '66dcc5c1d74d8f522ccb8e22',
-      name: 'iPhone 12',
+      name: 'Celular Paramount Vision X Pro, Helio AX3D, 9GB RAM, 257GB, Tela OLED 7.4" 90Hz, Câmera 64MP, Bateria 4500mAh, 5G - ATFXP-BK',
       code: 8,
       description:
         'O iPhone 12 é o modelo mais recente da Apple, oferecendo desempenho superior com o chip A15 Bionic e conectividade 5G.',
@@ -224,7 +224,7 @@ export const data = {
     },
     {
       _id: '66dcc5c1d74d8f522ccb8e21',
-      name: 'iPhone 10',
+      name: 'Celular AlphaTech Fusion X Pro, Helio G99, 8GB RAM, 128GB, Tela OLED 6.4" 90Hz, Câmera 64MP, Bateria 4500mAh, 5G - ATFXP-BK',
       code: 9,
       description:
         'O iPhone 12 é o modelo mais recente da Apple, oferecendo desempenho superior com o chip A15 Bionic e conectividade 5G.',
@@ -296,7 +296,7 @@ export const data = {
     },
     {
       _id: '66dcc5c1d74d8f522ccb8e20',
-      name: 'iPhone 17',
+      name: 'Smartphone ZenPhone Blaze X9, Snapdragon 8 Gen 2, 12GB RAM, 256GB, Tela AMOLED 6.7" 120Hz, Câmera 108MP, Bateria 5000mAh, Dual SIM - ZBX9-BL',
       code: 10,
       description:
         'O iPhone 17 é o modelo mais recente da Apple, oferecendo desempenho superior com o chip A15 Bionic e conectividade 5G.',
@@ -368,7 +368,7 @@ export const data = {
     },
     {
       _id: '66dcc5c1d74d8f522ccb8e24',
-      name: 'Geladeira Frost Free',
+      name: 'Geladeira Smart Frostbite Tech 520L, Frost Free, Inverter, Wi-Fi integrado, Controle de temperatura digital, Compartimento Turbo Freeze - FG520-SI-BL',
       company: '66e6397153330e3d00249928',
       code: 21,
       description:
@@ -413,7 +413,7 @@ export const data = {
     },
     {
       _id: '66dcc5c1d74d8f522ccb8e11',
-      name: 'Cadeira',
+      name: 'Cadeira Gamer Thunderx Fury Red XG-400, couro sintético, ajuste de altura, encosto reclinável até 180°, apoio para pés retrátil, LED RGB - CGTX-400-BK-R',
       company: '66e6397153330e3d00249928',
       code: 2,
       description:
@@ -458,7 +458,7 @@ export const data = {
     },
     {
       _id: '66dcc5c1d74d8f522ccb8e19',
-      name: 'Tênis de Corrida Ultraleve',
+      name: 'Tênis Esportivo Runmaster Speed X1, Amortecimento ProFoam, Solado FlexGrip, Respirável, Ultra leve, Palmilha MemoryTech - RSX1-BL-RD',
       company: '66e6397153330e3d00249928',
       code: 3,
       description:
@@ -503,7 +503,7 @@ export const data = {
     },
     {
       _id: '66dcc5c1d74d8f522ccb8e26',
-      name: 'Tênis Casual Elegante',
+      name: 'Tênis Urbano AeroSpeed 350, Design Slim, Palmilha de Gel, Antiderrapante, Respirável, Tecido FlexForm - AS350-BK',
       company: '66e6397153330e3d00249928',
       code: 4,
       description:
@@ -547,7 +547,7 @@ export const data = {
     },
     {
       _id: '66dcc5c1d74d8f522ccb8e27',
-      name: 'Tênis de Corrida para Trilhas',
+      name: 'Tênis Trailrunner Pro XT6, Solado ExtremeGrip, Impermeável, Reforço lateral, Palmilha anatômica, Sistema de ventilação - TRPXT6-GR',
       company: '66e6397153330e3d00249928',
       code: 5,
       description:
@@ -592,7 +592,7 @@ export const data = {
     },
     {
       _id: '66dcc5c1d74d8f522ccb8e28',
-      name: 'Tênis de Corrida para Asfalto',
+      name: 'Tênis Casual Strider Comfort Pro X500, Tecnologia CloudStep, Antiderrapante, Material sintético premium, Design ergonômico - SCPX500-WH',
       company: '66e6397153330e3d00249928',
       code: 6,
       description:

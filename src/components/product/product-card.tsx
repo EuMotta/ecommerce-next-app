@@ -1,7 +1,8 @@
+'use client';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React from 'react';
-import { BsCart } from 'react-icons/bs';
 
 import { Product } from '@/interfaces/product';
 import { Eye, Heart } from 'lucide-react';
@@ -12,9 +13,55 @@ import StarRating from '../rating/star';
 import { Button } from '../ui/button';
 
 const ProductCard = ({ product }: { product: Product }) => {
+  const router = useRouter();
   return (
-    <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-      <div className="h-56 w-full">
+    <div className="flex min-w-52 max-w-72 flex-col justify-between rounded border p-2 px-3 shadow-sm">
+      <div className="flex items-center justify-between gap-2 p-2">
+        <div className="flex gap-1">
+          <Link
+            href={'/'}
+            data-tooltip-target="tooltip-quick-look-2"
+            className="rounded-lg p-1 text-muted-foreground"
+          >
+            <span className="sr-only"> Quick look </span>
+            <Eye size={15} />
+          </Link>
+          <div
+            id="tooltip-quick-look-2"
+            role="tooltip"
+            className="tooltip invisible absolute z-10 inline-block rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300 dark:bg-gray-700"
+            data-popper-placement="top"
+          >
+            Quick look
+            <div className="tooltip-arrow" data-popper-arrow=""></div>
+          </div>
+
+          <Link
+            href={'/'}
+            data-tooltip-target="tooltip-add-to-favorites-2"
+            className="rounded-lg p-1 text-muted-foreground"
+          >
+            <span className="sr-only"> Add to Favorites </span>
+            <Heart size={15} />
+          </Link>
+          <div
+            id="tooltip-add-to-favorites-2"
+            role="tooltip"
+            className="tooltip invisible absolute z-10 inline-block rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300 dark:bg-gray-700"
+            data-popper-placement="top"
+          >
+            Add to favorites
+            <div className="tooltip-arrow" data-popper-arrow=""></div>
+          </div>
+        </div>
+        <div className="flex items-center">
+          <StarRating rating={product?.average_rating ?? 0} size={10} />
+        </div>
+        <p className="text-[10px] font-medium text-muted-foreground">
+          ({product.total_ratings})
+        </p>
+      </div>
+      <div className="h-32 w-full">
         <Link href={`/product/${product.code}`}>
           <Image
             className="mx-auto h-full w-full object-contain"
@@ -26,64 +73,21 @@ const ProductCard = ({ product }: { product: Product }) => {
         </Link>
       </div>
 
-      <div className="pt-6">
-        <div className="mb-4 flex items-center justify-between gap-4">
+      <div>
+        <div className="flex items-center justify-between gap-4">
           {product.discount_amount && (
             <span className="bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-300 me-2 rounded px-2.5 py-0.5 text-xs font-medium">
-              desconto de {product.discount_amount}%
+              {product.discount_amount}%
             </span>
           )}
-
-          <div className="flex items-center justify-end gap-1">
-            <Button
-              size={'icon'}
-              variant={'link'}
-              type="button"
-              data-tooltip-target="tooltip-quick-look-2"
-              className="rounded-lg p-2 text-muted-foreground"
-            >
-              <span className="sr-only"> Quick look </span>
-              <Eye />
-            </Button>
-            <div
-              id="tooltip-quick-look-2"
-              role="tooltip"
-              className="tooltip invisible absolute z-10 inline-block rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300 dark:bg-gray-700"
-              data-popper-placement="top"
-            >
-              Quick look
-              <div className="tooltip-arrow" data-popper-arrow=""></div>
-            </div>
-
-            <Button
-              size={'icon'}
-              variant={'link'}
-              type="button"
-              data-tooltip-target="tooltip-add-to-favorites-2"
-              className="rounded-lg p-2 text-muted-foreground"
-            >
-              <span className="sr-only"> Add to Favorites </span>
-              <Heart />
-            </Button>
-            <div
-              id="tooltip-add-to-favorites-2"
-              role="tooltip"
-              className="tooltip invisible absolute z-10 inline-block rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300 dark:bg-gray-700"
-              data-popper-placement="top"
-            >
-              Add to favorites
-              <div className="tooltip-arrow" data-popper-arrow=""></div>
-            </div>
-          </div>
         </div>
 
         <Link
           href={`/product/${product.code}`}
-          className="text-lg font-semibold leading-tight hover:underline"
+          className="line-clamp-3 text-sm font-semibold leading-tight hover:underline"
         >
           {product.name}
         </Link>
-        <br />
         <Button size={'sm'} className="p-0" variant={'link'} asChild>
           <Link
             href={{
@@ -94,39 +98,25 @@ const ProductCard = ({ product }: { product: Product }) => {
             {product.company.corporate_name}
           </Link>
         </Button>
-        <div className="flex items-center gap-2">
-          <div className="flex items-center">
-            <StarRating rating={product?.average_rating ?? 0} />
-          </div>
 
-          <p className="text-sm font-medium">
-            {product.average_rating?.toFixed(1)}
-          </p>
-          <p className="text-sm font-medium text-muted-foreground">
-            ({product.total_ratings})
-          </p>
-        </div>
-
-        <div className="flex items-center justify-between gap-4">
-          <div className="">
-            {product.discount_amount && (
-              <p className="text-sm font-extrabold leading-tight text-destructive line-through">
-                {currencyConverter(product.price)}
-              </p>
-            )}
-            <p className="text-xl font-extrabold leading-tight text-green-500">
-              {currencyConverter(product.price_with_discount)}
+        <div className="">
+          {product.discount_amount && (
+            <p className="text-sm font-extrabold leading-tight text-destructive line-through">
+              {currencyConverter(product.price)}
             </p>
-          </div>
-
-          <Link
-            href={`/product/${product.code}`}
-            type="button"
-            className="p-5 text-primary"
-          >
-            <BsCart size={25} />
-          </Link>
+          )}
+          <p className="text-xl font-extrabold leading-tight text-green-500">
+            {currencyConverter(product.price_with_discount)}
+          </p>
+          <p className="text-[10px] text-muted-foreground">À vista no cartão</p>
         </div>
+        <Button
+          size={'sm'}
+          className="w-full"
+          onClick={() => router.push(`/product/${product.code}`)}
+        >
+          Comprar
+        </Button>
       </div>
     </div>
   );

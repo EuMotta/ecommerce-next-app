@@ -198,15 +198,18 @@ const Page = ({ params }: Params) => {
                         <Link
                           href={`/product/${product.code}`}
                           key={product._id}
-                          className="relative"
+                          className="relative block h-64 w-48"
                         >
-                          <Image
-                            src={product.image[0]}
-                            alt={product.name}
-                            width={100}
-                            height={100}
-                          />
-                          <div className="text-center text-xs text-primary">
+                          <div className="flex h-20 w-20 items-center justify-center">
+                            <Image
+                              src={product.image[0]}
+                              alt={product.name}
+                              width={400}
+                              height={400}
+                              className=""
+                            />
+                          </div>
+                          <div className="mt-2 text-center text-xs text-primary">
                             {currencyConverter(product.price)}
                           </div>
                         </Link>

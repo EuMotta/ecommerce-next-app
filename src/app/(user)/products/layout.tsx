@@ -2,6 +2,7 @@
 import type { Metadata } from 'next';
 
 import Basic from '@/components/filter/menu-filter';
+import { CarouselProducts } from '@/components/products/carousel';
 
 import { ChildrenProps } from '../../../../@Types/global';
 
@@ -20,7 +21,8 @@ export const metadata: Metadata = {
 
 export default function Dashboard({ children }: ChildrenProps) {
   return (
-    <div className="flex flex-col">
+    <div className="flex max-h-screen flex-col">
+      <CarouselProducts />
       <Basic />
       {children}
     </div>

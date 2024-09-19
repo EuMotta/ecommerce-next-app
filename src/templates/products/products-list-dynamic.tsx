@@ -44,7 +44,7 @@ const ProductListDynamic = ({ filter }: any) => {
         />
       )}
       {isError && <div className="text-destructive">{error?.message}</div>}
-      <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5">
         {products &&
           products.data?.map((product) => (
             <ProductCard key={product._id} product={product} />
