@@ -463,7 +463,7 @@ export const data = {
       code: 3,
       description:
         'O Tênis de Corrida Ultraleve é ideal para corredores que buscam conforto e desempenho. Com tecnologia de amortecimento avançada e design aerodinâmico, é a escolha perfeita para treinos e competições.',
-      image: ['/products/shoes/1.jpeg'],
+      image: ['/products/phone/1.jpeg'],
       weight: 250,
       warranty: 3,
       technicalSpecifications: {
@@ -632,11 +632,203 @@ export const data = {
         '66de35051957e148d7440f28',
         '66de35051957e148d7440f29',
       ],
-      slug: 'tenis-de-corrida-para-asfalto-com-amortecimento',
+      slug: 'tenis-de-corrida-para-asfalto-com-amortecimento4',
       summary:
         'Tênis de Corrida para Asfalto com amortecimento e material respirável.',
       cover: '/products/coverasphalt_running_shoes.png',
       sub_category: '66dcc4ff55c8d7a840dbbd72',
+      created_at: '2024-09-13T00:00:00Z',
+    },
+    {
+      name: 'Smartphone NovaTech Titan Z7, Quantum X8, 8GB RAM, 128GB, Tela Super AMOLED 6.8" 90Hz, Câmera 64MP, Bateria 4500mAh, Dual SIM - NTZ7-SL',
+      company: '66e6397153330e3d00249928',
+      code: 11,
+      description:
+        'O Tênis de Corrida para Asfalto é ideal para corredores urbanos, oferecendo conforto e suporte em superfícies duras.',
+      image: ['/products/phone/4.jpeg'],
+      weight: 275,
+      warranty: 3,
+      technicalSpecifications: {
+        characteristics:
+          'Tênis otimizado para corridas em asfalto, com amortecimento e suporte adequados.',
+        specifications: [
+          {
+            title: 'Material',
+            description: ['Malha respirável', 'Solado em borracha'],
+          },
+          {
+            title: 'Amortecimento',
+            description: ['Tecnologia de amortecimento em gel'],
+          },
+          {
+            title: 'Peso',
+            description: ['275 gramas por pé'],
+          },
+          {
+            title: 'Tamanhos Disponíveis',
+            description: ['36 a 44'],
+          },
+          {
+            title: 'Cor',
+            description: ['Azul com detalhes em branco'],
+          },
+        ],
+      },
+      price: 160,
+      skus: [
+        '66de35051957e148d7440f27',
+        '66de35051957e148d7440f28',
+        '66de35051957e148d7440f29',
+      ],
+      slug: 'tenis-de-corrida-para-asfalto-com-amortecimento3',
+      summary:
+        'Tênis de Corrida para Asfalto com amortecimento e material respirável.',
+      cover: '/products/coverasphalt_running_shoes.png',
+      sub_category: '66dcc4ff55c8d7a840dbbd6e',
+      created_at: '2024-09-13T00:00:00Z',
+    },
+    {
+      name: 'Smartphone HyperTech Vortex X12, Neutron A12, 16GB RAM, 512GB, Tela OLED 7.0" 120Hz, Câmera 108MP, Bateria 4800mAh, Dual SIM - HTX12-RD',
+      company: '66e6397153330e3d00249928',
+      code: 12,
+      description:
+        'O Tênis de Corrida para Asfalto é ideal para corredores urbanos, oferecendo conforto e suporte em superfícies duras.',
+      image: ['/products/phone/4.jpeg'],
+      weight: 275,
+      warranty: 3,
+      technicalSpecifications: {
+        characteristics:
+          'Tênis otimizado para corridas em asfalto, com amortecimento e suporte adequados.',
+        specifications: [
+          {
+            title: 'Material',
+            description: ['Malha respirável', 'Solado em borracha'],
+          },
+          {
+            title: 'Amortecimento',
+            description: ['Tecnologia de amortecimento em gel'],
+          },
+          {
+            title: 'Peso',
+            description: ['275 gramas por pé'],
+          },
+          {
+            title: 'Tamanhos Disponíveis',
+            description: ['36 a 44'],
+          },
+          {
+            title: 'Cor',
+            description: ['Azul com detalhes em branco'],
+          },
+        ],
+      },
+      price: 160,
+      skus: [
+        '66de35051957e148d7440f27',
+        '66de35051957e148d7440f28',
+        '66de35051957e148d7440f29',
+      ],
+      slug: 'tenis-de-corrida-para-asfalto-com-amortecimento2',
+      summary:
+        'Tênis de Corrida para Asfalto com amortecimento e material respirável.',
+      cover: '/products/coverasphalt_running_shoes.png',
+      sub_category: '66dcc4ff55c8d7a840dbbd6e',
+      created_at: '2024-09-13T00:00:00Z',
+    },
+    {
+      name: 'Smartphone Fusion Alpha X15, Orion A15, 12GB RAM, 256GB, Tela AMOLED 6.9" 90Hz, Câmera 50MP, Bateria 4600mAh, Dual SIM - FAX15-GR',
+      company: '66e6397153330e3d00249928',
+      code: 13,
+      description:
+        'O Tênis de Corrida para Asfalto é ideal para corredores urbanos, oferecendo conforto e suporte em superfícies duras.',
+      image: ['/products/phone/4.jpeg'],
+      weight: 275,
+      warranty: 3,
+      technicalSpecifications: {
+        characteristics:
+          'Tênis otimizado para corridas em asfalto, com amortecimento e suporte adequados.',
+        specifications: [
+          {
+            title: 'Material',
+            description: ['Malha respirável', 'Solado em borracha'],
+          },
+          {
+            title: 'Amortecimento',
+            description: ['Tecnologia de amortecimento em gel'],
+          },
+          {
+            title: 'Peso',
+            description: ['275 gramas por pé'],
+          },
+          {
+            title: 'Tamanhos Disponíveis',
+            description: ['36 a 44'],
+          },
+          {
+            title: 'Cor',
+            description: ['Azul com detalhes em branco'],
+          },
+        ],
+      },
+      price: 160,
+      skus: [
+        '66de35051957e148d7440f27',
+        '66de35051957e148d7440f28',
+        '66de35051957e148d7440f29',
+      ],
+      slug: 'tenis-de-corrida-para-asfalto-com-amortecimento1',
+      summary:
+        'Tênis de Corrida para Asfalto com amortecimento e material respirável.',
+      cover: '/products/coverasphalt_running_shoes.png',
+      sub_category: '66dcc4ff55c8d7a840dbbd6e',
+      created_at: '2024-09-13T00:00:00Z',
+    },
+    {
+      name: 'Smartphone Zenith Turbo X10, TurboCore X10, 14GB RAM, 128GB, Tela Dynamic AMOLED 7.2" 120Hz, Câmera 72MP, Bateria 5000mAh, Dual SIM - ZTX10-BK',
+      company: '66e6397153330e3d00249928',
+      code: 15,
+      description:
+        'O Tênis de Corrida para Asfalto é ideal para corredores urbanos, oferecendo conforto e suporte em superfícies duras.',
+      image: ['/products/phone/4.jpeg'],
+      weight: 275,
+      warranty: 3,
+      technicalSpecifications: {
+        characteristics:
+          'Tênis otimizado para corridas em asfalto, com amortecimento e suporte adequados.',
+        specifications: [
+          {
+            title: 'Material',
+            description: ['Malha respirável', 'Solado em borracha'],
+          },
+          {
+            title: 'Amortecimento',
+            description: ['Tecnologia de amortecimento em gel'],
+          },
+          {
+            title: 'Peso',
+            description: ['275 gramas por pé'],
+          },
+          {
+            title: 'Tamanhos Disponíveis',
+            description: ['36 a 44'],
+          },
+          {
+            title: 'Cor',
+            description: ['Azul com detalhes em branco'],
+          },
+        ],
+      },
+      price: 160,
+      skus: [
+        '66de35051957e148d7440f27',
+        '66de35051957e148d7440f28',
+        '66de35051957e148d7440f29',
+      ],
+      slug: 'tenis-de-corrida-para-asfalto-com-amortecimento',
+      summary:
+        'Tênis de Corrida para Asfalto com amortecimento e material respirável.',
+      cover: '/products/coverasphalt_running_shoes.png',
+      sub_category: '66dcc4ff55c8d7a840dbbd6e',
       created_at: '2024-09-13T00:00:00Z',
     },
   ],

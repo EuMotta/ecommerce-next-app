@@ -13,7 +13,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuSubContent,
 } from '@/components/ui/dropdown-menu';
-import { Package, Monitor, ChevronDown } from 'lucide-react';
+import { Package, Monitor, ChevronDown, Footprints, House } from 'lucide-react';
 
 import Container from '../common/container';
 import { Button } from '../ui/button';
@@ -54,13 +54,13 @@ const NavLinkHorizontal = () => {
     {
       label: 'Tênis',
       href: 'tenis',
-      icon: <Monitor className="h-4 w-4" />,
+      icon: <Footprints className="h-4 w-4" />,
       subcategories: [{ label: 'Corrida', href: 'tenis-de-corrida' }],
     },
     {
       label: 'Residencial',
       href: 'residencial',
-      icon: <Monitor className="h-4 w-4" />,
+      icon: <House className="h-4 w-4" />,
       subcategories: [{ label: 'Refrigeradores', href: 'refrigeradores' }],
     },
   ];
@@ -76,14 +76,6 @@ const NavLinkHorizontal = () => {
   return (
     <nav className="bg-primary text-sm font-medium lg:px-4">
       <Container className="flex items-start">
-        <Button
-          variant="ghost"
-          size="sm"
-          className="flex items-center rounded-none text-muted"
-          onClick={() => router.push('/products')}
-        >
-          Todos os produtos
-        </Button>
         {links.map(({ href, icon, label }) => {
           const isActive = pathname === href;
 
@@ -126,6 +118,7 @@ const NavLinkHorizontal = () => {
                 <DropdownMenuSub key={category.href}>
                   <DropdownMenuSubTrigger
                     onClick={() => handleCategoryChange(category.href)}
+                    className="flex gap-1"
                   >
                     {category.icon}
                     {category.label}
