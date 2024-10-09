@@ -54,12 +54,14 @@ const ProductCard = ({ product }: { product: Product }) => {
             <div className="tooltip-arrow" data-popper-arrow=""></div>
           </div>
         </div>
-        <div className="flex items-center">
-          <StarRating rating={product?.average_rating ?? 0} size={10} />
+        <div className="flex gap-1">
+          <div className="flex items-center">
+            <StarRating rating={product?.average_rating ?? 0} size={10} />
+          </div>
+          <p className="text-[10px] font-medium text-muted-foreground">
+            ({product.total_ratings})
+          </p>
         </div>
-        <p className="text-[10px] font-medium text-muted-foreground">
-          ({product.total_ratings})
-        </p>
       </div>
       <div className="h-32 w-full">
         <Link href={`/product/${product.code}`}>
@@ -74,14 +76,6 @@ const ProductCard = ({ product }: { product: Product }) => {
       </div>
 
       <div>
-        <div className="flex items-center justify-between gap-4">
-          {product.discount_amount && (
-            <span className="bg-primary-100 text-primary-800 dark:bg-primary-900 dark:text-primary-300 me-2 rounded px-2.5 py-0.5 text-xs font-medium">
-              {product.discount_amount}%
-            </span>
-          )}
-        </div>
-
         <Link
           href={`/product/${product.code}`}
           className="line-clamp-3 text-sm font-semibold leading-tight hover:underline"
@@ -101,9 +95,14 @@ const ProductCard = ({ product }: { product: Product }) => {
 
         <div className="">
           {product.discount_amount && (
-            <p className="text-sm font-extrabold leading-tight text-destructive line-through">
-              {currencyConverter(product.price)}
-            </p>
+            <div className="flex">
+              <p className="text-sm font-extrabold leading-tight text-destructive line-through">
+                {currencyConverter(product.price)}{' '}
+              </p>
+              <span className="me-2 rounded px-2.5 py-0.5 text-xs font-medium text-green-500">
+                {product.discount_amount}%
+              </span>
+            </div>
           )}
           <p className="text-xl font-extrabold leading-tight text-green-500">
             {currencyConverter(product.price_with_discount)}

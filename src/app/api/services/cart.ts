@@ -57,7 +57,7 @@ export class CartServices {
     const session = await getServerSession(authOptions);
 
     if (!session || !session.user) {
-      throw new Error('Usuário não autenticado');
+      return {};
     }
     await db.connect();
 

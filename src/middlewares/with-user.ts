@@ -12,7 +12,7 @@ export const auth: MiddlewareFactory = (next) => {
       secret: env.NEXTAUTH_SECRET,
     });
     const session = token;
-    const protectedRoutes = ['/dashboard'];
+    const protectedRoutes = ['/cart'];
     const authRoutes = ['/entrar', '/cadastrar', '/'];
     const isProtectedRoute = protectedRoutes.some((route) =>
       request.nextUrl.pathname.startsWith(route),
@@ -21,7 +21,7 @@ export const auth: MiddlewareFactory = (next) => {
     const isAuthRoute = authRoutes.includes(request.nextUrl.pathname);
 
     if (!session && isProtectedRoute) {
-      const absoluteURL = new URL('/unauthorized', request.nextUrl.origin);
+      const absoluteURL = new URL('/entrar', request.nextUrl.origin);
       return NextResponse.rewrite(absoluteURL.toString());
     }
     if (session && isAuthRoute) {

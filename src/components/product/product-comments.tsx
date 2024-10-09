@@ -1,3 +1,4 @@
+import { useSession } from 'next-auth/react';
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 
@@ -97,7 +98,7 @@ const ProductComments = ({
         refetch();
       },
     });
-
+  const { status } = useSession();
   const onSubmit = async (data: FormData) => {
     try {
       await sendComment(data);
@@ -107,6 +108,11 @@ const ProductComments = ({
       }
     }
   };
+
+  const buttonStatus =
+    isPendingSendComment ||
+    status === 'loading' ||
+    status === 'unauthenticated';
 
   return (
     <div className="space-y-5">
@@ -227,7 +233,7 @@ const ProductComments = ({
             <Button
               type="submit"
               size="sm"
-              disabled={isPendingSendComment}
+              disabled={buttonStatus}
               className={`ml-auto ${isPendingSendComment ? 'disabled' : ''}`}
             >
               {isPendingSendComment && <Loader className="animate-spin" />}

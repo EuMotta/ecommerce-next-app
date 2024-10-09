@@ -18,17 +18,17 @@ const images = [
 
 export function CarouselProducts() {
   return (
-    <Carousel className="mx-40">
+    <Carousel className="mx-20">
       <CarouselContent>
         {images.map((src, index) => (
           <CarouselItem key={index}>
-            <div className="flex h-96 items-center justify-center p-1">
+            <div>
               <Image
                 src={src}
                 alt={`Product ${index + 1}`}
-                width={800}
-                height={800}
-                className="rounded-md object-contain"
+                width={1920}
+                height={500}
+                className="h-full w-full object-contain"
               />
             </div>
           </CarouselItem>

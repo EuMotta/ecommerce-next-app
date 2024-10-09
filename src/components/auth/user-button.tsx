@@ -1,5 +1,6 @@
 'use client';
 import { signOut, useSession } from 'next-auth/react';
+import Link from 'next/link';
 import React from 'react';
 
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
@@ -20,6 +21,13 @@ const UserButton = () => {
   if (status === 'loading')
     return <Skeleton className="h-5 w-5 rounded-full" />;
 
+  if (!session || !session.user) {
+    return (
+      <Button>
+        <Link href={'/entrar'}>Entrar</Link>
+      </Button>
+    );
+  }
   const getInitials = () => {
     if (session?.user?.name && session?.user?.last_name) {
       const firstNameInitial = session.user.name.charAt(0).toUpperCase();
@@ -33,7 +41,7 @@ const UserButton = () => {
       <DropdownMenuTrigger asChild>
         <Button variant="secondary" size="icon" className="rounded-full">
           <Avatar>
-            <AvatarImage src="https://github.com/shadcn.png" />
+            {session?.user?.image && <AvatarImage src={session.user.image} />}
             <AvatarFallback>{getInitials()}</AvatarFallback>
           </Avatar>
         </Button>
@@ -44,7 +52,9 @@ const UserButton = () => {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>Perfil</DropdownMenuItem>
-        <DropdownMenuItem>Ajuda</DropdownMenuItem>
+        <DropdownMenuItem>
+          <Link href={'/favoritos'}>Favoritos</Link>
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => signOut({ callbackUrl: '/entrar' })}>
           Sair

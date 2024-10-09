@@ -34,7 +34,7 @@ const ProductListDynamic = ({ filter }: any) => {
   const pageSizeOptions = [5, 10, 15, 20];
 
   return (
-    <>
+    <div>
       {isLoading && (
         <SkeletonCards
           height={401}
@@ -59,7 +59,7 @@ const ProductListDynamic = ({ filter }: any) => {
           pageSizeSearchParam: 'limit',
         }}
       />
-    </>
+    </div>
   );
 };
 

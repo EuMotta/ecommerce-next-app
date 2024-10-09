@@ -64,7 +64,7 @@ export function UserLoginForm({ className, ...props }: UserAuthFormProps) {
     onSuccess: () => {
       reset();
       toast.success('Login realizado com sucesso! Encaminhando...');
-      router.push('/dashboard');
+      router.push('/products');
     },
     onError: (error: Error) => {
       toast.error(error.message);

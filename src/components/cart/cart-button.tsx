@@ -9,6 +9,7 @@ import { Skeleton } from '../ui/skeleton';
 
 const CartButton = () => {
   const { isLoading, data } = useGetCart();
+
   return (
     <Link href="/cart" className="flex items-center gap-2">
       <ShoppingCart className="h-4 w-4" />
@@ -19,7 +20,7 @@ const CartButton = () => {
           variant={'outline'}
           className="left relative -top-3 right-2 ml-auto flex h-3 w-2 shrink-0 items-center justify-center rounded-full text-xs"
         >
-          {data?.total_count}
+          {data?.total_count ?? 0}
         </Badge>
       )}
     </Link>

@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { BsCartXFill } from 'react-icons/bs';
 
@@ -19,12 +20,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Skeleton } from '@/components/ui/skeleton';
 import { useGetProductRatings } from '@/hooks/data-product-ratings/get-product-ratings';
 import { useGetProduct } from '@/hooks/data-product/get-product';
 import { Sku } from '@/interfaces/sku';
 import { ProductProvider } from '@/providers/product';
-import { HeartIcon, Tag } from 'lucide-react';
+import { ChevronLeft, HeartIcon, Tag } from 'lucide-react';
 
 import currencyConverter from '@/utils/Conversions/currencyConverter';
 
@@ -49,11 +49,11 @@ const Page = ({ params }: Params) => {
     error: errorRatings,
     refetch: refetchRatings,
   } = useGetProductRatings({ id: product?._id, limit: commentsSize });
-
+  const router = useRouter();
   const loadMoreComments = () => {
     setCommentsSize((prevSize) => prevSize + 5);
   };
-  console.log(products);
+
   const [selectedSku, setSelectedSku] = useState<Sku | null>(null);
 
   useEffect(() => {
@@ -68,7 +68,25 @@ const Page = ({ params }: Params) => {
 
   return (
     <div className="p-2">
-      {isLoading && <Skeleton className="h-4 w-[250px]" />}
+      <Button
+        variant={'outline'}
+        size={'icon'}
+        onClick={() => router.back()}
+        className="m-5"
+      >
+        <ChevronLeft />{' '}
+      </Button>
+      {isLoading && (
+        <div className="flex items-center justify-center">
+          <Image
+            src={'/stickers/loading.gif'}
+            width={200}
+            height={200}
+            alt="loading"
+          />
+          <p>Carregando produto</p>
+        </div>
+      )}
       {isError && <div className="text-destructive">{error?.message}</div>}
       {product && selectedSku && (
         <ProductProvider
