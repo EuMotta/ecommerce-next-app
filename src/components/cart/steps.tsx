@@ -18,7 +18,6 @@ const Steps = () => {
   const pathname = usePathname();
 
   const pathSegments = pathname.split('/').filter(Boolean);
-  console.log(pathSegments);
   const buildBreadcrumbUrl = (index: number) => {
     return '/' + pathSegments.slice(0, index + 1).join('/');
   };

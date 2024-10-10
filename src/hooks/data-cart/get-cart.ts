@@ -7,7 +7,7 @@ export interface GetCart {
 }
 export function useGetCart(): UseQueryResult<Cart, Error> {
   return useQuery({
-    queryKey: ['get-product'],
+    queryKey: ['get-cart'],
     queryFn: () => getCart(),
   });
 }

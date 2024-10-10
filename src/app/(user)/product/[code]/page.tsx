@@ -42,12 +42,12 @@ const Page = ({ params }: Params) => {
     error,
   } = useGetProduct(params.code);
   const product = products?.product;
+  console.log(product);
   const {
     data: reviews,
     isLoading: isLoadingRatings,
     isError: isErrorRatings,
     error: errorRatings,
-    refetch: refetchRatings,
   } = useGetProductRatings({ id: product?._id, limit: commentsSize });
   const router = useRouter();
   const loadMoreComments = () => {
@@ -172,7 +172,7 @@ const Page = ({ params }: Params) => {
                     <DropdownMenuTrigger asChild>
                       <Button
                         variant="outline"
-                        className="w-[150px] justify-start"
+                        className="w-auto justify-start"
                       >
                         {selectedSku ? selectedSku.sku : product.skus[0].sku}
                       </Button>
@@ -246,7 +246,6 @@ const Page = ({ params }: Params) => {
             />
             {reviews && (
               <ProductComments
-                refetch={refetchRatings}
                 code={params.code}
                 companyId={product.company._id}
                 reviews={reviews}

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import UserButton from '@/components/auth/user-button';
 import CartButton from '@/components/cart/cart-button';
 import Container from '@/components/common/container';
+import FavoriteButton from '@/components/favorite/favorite-button';
 import GlobalSearch from '@/components/filter/global-search';
 import Logo from '@/components/logo';
 import NavLink from '@/components/navbar/nav-link';
@@ -66,6 +67,7 @@ export default function Dashboard({ children }: ChildrenProps) {
             </div>
             <GlobalSearch />
             <CartButton />
+            <FavoriteButton />
             <UserButton />
           </header>
         </Container>

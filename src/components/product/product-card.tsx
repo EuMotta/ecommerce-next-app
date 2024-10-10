@@ -5,10 +5,11 @@ import { useRouter } from 'next/navigation';
 import React from 'react';
 
 import { Product } from '@/interfaces/product';
-import { Eye, Heart } from 'lucide-react';
+import { Eye } from 'lucide-react';
 
 import currencyConverter from '@/utils/Conversions/currencyConverter';
 
+import AddFavoriteButton from '../favorite/add-favorite';
 import StarRating from '../rating/star';
 import { Button } from '../ui/button';
 
@@ -17,7 +18,7 @@ const ProductCard = ({ product }: { product: Product }) => {
   return (
     <div className="flex min-w-52 max-w-72 flex-col justify-between rounded border p-2 px-3 shadow-sm">
       <div className="flex items-center justify-between gap-2 p-2">
-        <div className="flex gap-1">
+        <div className="flex items-center gap-1">
           <Link
             href={'/'}
             data-tooltip-target="tooltip-quick-look-2"
@@ -36,14 +37,8 @@ const ProductCard = ({ product }: { product: Product }) => {
             <div className="tooltip-arrow" data-popper-arrow=""></div>
           </div>
 
-          <Link
-            href={'/'}
-            data-tooltip-target="tooltip-add-to-favorites-2"
-            className="rounded-lg p-1 text-muted-foreground"
-          >
-            <span className="sr-only"> Add to Favorites </span>
-            <Heart size={15} />
-          </Link>
+          <AddFavoriteButton productId={product._id} />
+
           <div
             id="tooltip-add-to-favorites-2"
             role="tooltip"

@@ -2,10 +2,10 @@ import { useSession } from 'next-auth/react';
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 
+import { addReview } from '@/app/api/data/reviews/add';
 import { Reviews } from '@/interfaces/review';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { formatDistanceToNow } from 'date-fns';
 import { Loader } from 'lucide-react';
 import { toast } from 'sonner';
@@ -41,7 +41,6 @@ interface ProductCommentsProps {
   errorRatings: Error;
   commentsSize: number;
   loadMoreComments: () => void;
-  refetch: () => void;
 }
 
 const ProductComments = ({
@@ -53,7 +52,6 @@ const ProductComments = ({
   errorRatings,
   commentsSize,
   loadMoreComments,
-  refetch,
 }: ProductCommentsProps) => {
   const {
     control,
@@ -67,41 +65,28 @@ const ProductComments = ({
       comment: '',
     },
   });
-
+  const queryClient = useQueryClient();
   const { mutateAsync: sendComment, isPending: isPendingSendComment } =
     useMutation({
-      mutationFn: async (data: FormData) => {
-        try {
-          const response = await axios.post('/api/data/reviews', {
-            rating: data.rating,
-            comment: data.comment,
-            code,
-            companyId,
-            delivery_time: data.delivery_time,
-          });
-          return response.data;
-        } catch (error: any) {
-          if (
-            error.response &&
-            error.response.data &&
-            error.response.data.message
-          ) {
-            throw new Error(error.response.data.message);
-          } else {
-            throw new Error('Erro desconhecido ao enviar comentário');
-          }
-        }
-      },
+      mutationFn: addReview,
       onSuccess: () => {
         toast.success('Comentário enviado com sucesso!');
+        queryClient.invalidateQueries({
+          queryKey: ['get-product-ratings'],
+        });
         reset();
-        refetch();
       },
     });
   const { status } = useSession();
   const onSubmit = async (data: FormData) => {
     try {
-      await sendComment(data);
+      await sendComment({
+        rating: data.rating,
+        comment: data.comment,
+        code,
+        companyId,
+        delivery_time: data.delivery_time,
+      });
     } catch (error) {
       if (error instanceof Error) {
         toast.error(error.message);

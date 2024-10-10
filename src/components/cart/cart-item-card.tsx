@@ -2,10 +2,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
-import { useGetCart } from '@/hooks/data-cart/get-cart';
-import { Daum } from '@/interfaces/cart';
-import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
+import { updateCartItemQuantity } from '@/app/api/data/cart/update';
+import { CartItem } from '@/interfaces/cart';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Heart, Minus, Plus, Trash } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -14,47 +13,21 @@ import currencyConverter from '@/utils/Conversions/currencyConverter';
 import { Button } from '../ui/button';
 
 interface CartItemCard {
-  item: Daum;
+  item: CartItem;
 }
 const CartItemCard = ({ item }: CartItemCard) => {
-  const { refetch } = useGetCart();
-  const updateItemQuantity = async ({
-    itemId,
-    action,
-  }: {
-    itemId: string;
-    action: 'add-quantity' | 'remove-quantity' | 'delete-item';
-  }) => {
-    try {
-      if (action === 'delete-item') {
-        const response = await axios.delete(
-          `/api/data/cart/cart-item/${itemId}`,
-        );
-        return response.data;
-      } else {
-        const response = await axios.put(`/api/data/cart/cart-item/${itemId}`, {
-          action,
-        });
-
-        return response.data;
-      }
-    } catch (error: any) {
-      toast.error(error.message);
-    }
-  };
-
-  const {
-    mutateAsync: updateQuantity,
-    isPending,
-    /* error, */
-  } = useMutation({
-    mutationFn: updateItemQuantity,
+  const queryClient = useQueryClient();
+  const { mutateAsync: updateQuantity, isPending } = useMutation({
+    mutationFn: updateCartItemQuantity,
     onSuccess: (response) => {
       toast.success(response.message);
-      refetch();
+      queryClient.invalidateQueries({
+        queryKey: ['get-cart'],
+      });
     },
-    onError: (error) => {
+    onError: (error: any) => {
       console.error('Erro ao atualizar quantidade:', error.message);
+      toast.error(error.message || 'Erro ao atualizar quantidade');
     },
   });
   return (

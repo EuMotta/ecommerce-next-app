@@ -4,10 +4,10 @@ export interface Cart {
   total_count: number;
   total_value: number;
   total_value_with_discount: number;
-  data: Daum[];
+  data: CartItem[];
 }
 
-export interface Daum {
+export interface CartItem {
   _id: string;
   product: Product;
   quantity: number;
@@ -17,17 +17,11 @@ export interface Daum {
   total_value_with_discount: number;
 }
 
-export interface TechnicalSpecifications {
-  characteristics: string;
-  specifications: Specification[];
-}
-
-export interface Specification {
-  title: string;
-  description: string[];
-  _id: string;
-}
-
-export interface Company {
+interface Company {
   corporate_name: string;
+}
+
+export interface AddCartItem {
+  productId: string;
+  skuId: string;
 }

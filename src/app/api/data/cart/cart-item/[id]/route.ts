@@ -57,7 +57,7 @@ export async function DELETE(
     await cart.deleteCartItem(params.id);
 
     return NextResponse.json(
-      { message: 'Produto atualizado' },
+      { message: 'Produto removido do carrinho' },
       { status: 200 },
     );
   } catch (error) {
