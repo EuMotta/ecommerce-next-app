@@ -1,12 +1,17 @@
 import mongoose from 'mongoose';
 
-const FavoriteSchema = new mongoose.Schema(
+const cartSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
-      required: [true, 'Por favor, associe o favorito a um usuário'],
-      unique: [true, 'este usuário já tem um favorito'],
+      required: [true, 'Por favor, associe o carrinho a um usuário'],
+      unique: [true, 'este usuário já tem um carrinho'],
+    },
+    total: {
+      type: Number,
+      required: [true, 'Total necessário'],
+      default: 0,
     },
   },
   {
@@ -14,5 +19,4 @@ const FavoriteSchema = new mongoose.Schema(
   },
 );
 
-export default mongoose.models.Favorite ||
-  mongoose.model('Favorite', FavoriteSchema);
+export default mongoose.models.Cart || mongoose.model('Cart', cartSchema);

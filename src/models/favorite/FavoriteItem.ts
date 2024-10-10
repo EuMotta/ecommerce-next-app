@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const FavoriteItemSchema = new mongoose.Schema(
+const favoriteItemSchema = new mongoose.Schema(
   {
     favorite: {
       type: mongoose.Schema.Types.ObjectId,
@@ -19,4 +19,4 @@ const FavoriteItemSchema = new mongoose.Schema(
 );
 
 export default mongoose.models.FavoriteItem ||
-  mongoose.model('FavoriteItem', FavoriteItemSchema);
+  mongoose.model('FavoriteItem', favoriteItemSchema);
