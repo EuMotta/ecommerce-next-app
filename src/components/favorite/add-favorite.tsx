@@ -1,5 +1,4 @@
 'use client';
-
 import { addFavoriteItem } from '@/app/api/data/favorite/add';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Heart } from 'lucide-react';
@@ -10,7 +9,7 @@ import { Button } from '../ui/button';
 const AddFavoriteButton = ({ productId }: { productId: string }) => {
   const queryClient = useQueryClient();
 
-  const { mutateAsync: updateQuantity, isPending } = useMutation({
+  const { mutateAsync: addToFavorites, isPending } = useMutation({
     mutationFn: addFavoriteItem,
     onSuccess: (response) => {
       toast.success(response.message);
@@ -24,12 +23,20 @@ const AddFavoriteButton = ({ productId }: { productId: string }) => {
     },
   });
 
+  const onSubmit = async () => {
+    try {
+      await addToFavorites({ productId });
+    } catch (error: any) {
+      console.error('Erro ao processar o feedback:', error.message);
+    }
+  };
+
   return (
     <Button
       variant={'link'}
       disabled={isPending}
       size={'icon'}
-      onClick={() => updateQuantity({ productId })}
+      onClick={onSubmit}
       className="flex items-center gap-2"
     >
       <Heart className="h-4 w-4" />

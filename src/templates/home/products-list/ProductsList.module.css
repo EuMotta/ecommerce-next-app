@@ -7,7 +7,7 @@
 }
 
 .hero .hero_container .hero_content h1 {
-  @apply text-5xl font-medium;
+  @apply font-medium text-5xl;
 }
 
 .hero .hero_container .hero_content span {

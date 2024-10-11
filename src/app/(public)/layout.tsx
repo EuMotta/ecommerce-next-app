@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 
+import Navbar from '@/components/navbar/navbar';
+
 export const metadata: Metadata = {
   title: 'Home',
   description: 'Motta',
@@ -18,5 +20,5 @@ export default function PublicLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <div>{children}</div>;
+  return <Navbar>{children}</Navbar>;
 }

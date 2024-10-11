@@ -13,7 +13,7 @@ export const auth: MiddlewareFactory = (next) => {
     });
     const session = token;
     const protectedRoutes = ['/cart'];
-    const authRoutes = ['/entrar', '/cadastrar', '/'];
+    const authRoutes = ['/entrar', '/cadastrar'];
     const isProtectedRoute = protectedRoutes.some((route) =>
       request.nextUrl.pathname.startsWith(route),
     );
@@ -25,7 +25,7 @@ export const auth: MiddlewareFactory = (next) => {
       return NextResponse.rewrite(absoluteURL.toString());
     }
     if (session && isAuthRoute) {
-      const absoluteURL = new URL('/dashboard', request.nextUrl.origin);
+      const absoluteURL = new URL('/product', request.nextUrl.origin);
       return NextResponse.redirect(absoluteURL.toString());
     }
     return next(request, _next);

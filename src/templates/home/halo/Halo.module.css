@@ -1,0 +1,22 @@
+.halo {
+  @apply mx-auto grid px-4 lg:grid-cols-12 lg:gap-8 lg:py-16 xl:gap-0;
+}
+
+.halo .halo_container {
+  @apply place-self-center lg:col-span-7;
+}
+
+.halo .halo_container .halo_content {
+  @apply flex justify-center;
+}
+.halo .halo_container .halo_content h1 {
+  @apply text-5xl font-medium;
+}
+
+.halo .halo_container .halo_content span {
+  @apply text-primary;
+}
+
+.halo .halo_container .halo_content .halo_text {
+  @apply col-start-2 col-end-3 my-auto w-2/3 space-y-5;
+}
