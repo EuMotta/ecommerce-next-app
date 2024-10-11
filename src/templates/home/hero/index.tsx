@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 
-import styles from './Hero.module.css';
+import styles from './Hero1.module.css';
 
 const Hero = () => {
   return (
