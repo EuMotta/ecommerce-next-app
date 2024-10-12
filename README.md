@@ -1,86 +1,50 @@
-[![LinkedIn][linkedin-shield]][linkedin-url]
+<picture>
+  <source srcset="https://i.ibb.co/tHSQJzV/shopall-alinhado.png" media="(prefers-color-scheme: dark)">
+  <source srcset="https://i.ibb.co/vhRTDYk/shopall-alinhado-dark.png" media="(prefers-color-scheme: light)">
+  <img src="https://i.ibb.co/tHSQJzV/shopall-light.png" alt="ShopAll Logo">
+</picture>
 
-<!-- PROJECT LOGO -->
-<br />
-<div align="center">
-  <a href="https://github.com/EuMotta/nextjs-template-typescript">
-    <img src="https://i.ibb.co/K6wGmvs/next-1.png" alt="Logo" width="600" height="100">
-  </a>
+> Ecommerce ShopAll - Next.Js
 
-  <h3 align="center">Template Next.js</h3>
+[![next version](https://img.shields.io/badge/Next-14.1.1-black)](https://nextjs.org/blog/next-14-1) [![react version](https://img.shields.io/badge/React-18.0-blue)](https://react.dev/blog/2022/03/29/react-v18) [![license](https://img.shields.io/badge/License-MIT-green)](https://docs.github.com/pt/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository) [![database](https://img.shields.io/badge/Database-MongoDB-green)](https://www.mongodb.com/) [![jose antonio motta](https://img.shields.io/badge/Desenvolvido_por-José_Antonio_Motta-red)](https://www.linkedin.com/in/jos%C3%A9-antonio-bueno-motta-61006a26b/)
 
-  <p align="center">
-    Modelo que utilizo em meus projetos.
-    <br />
-    <br />
-    <a href="https://github.com/EuMotta?tab=repositories">Meus repositórios</a>
-    ·
-    <a href="https://github.com/EuMotta/nextjs-template-typescript/issues">Reportar Bugs</a>
-    ·
-    <a href="https://github.com/EuMotta/nextjs-template-typescript/pulls">Pull Requests</a>
-  </p>
-</div>
+<img src="https://i.ibb.co/bmnyLT8/Home-page-0001.jpg" />
 
-## Sobre o projeto
 
-Este repositório é um template que utilizo em meus projetos com Next.js. Ele contém uma estrutura básica de um projeto Next.js, juntamente com algumas bibliotecas e configurações que costumo usar.
+## 🚩 Conteúdo
 
-Este template inclui as seguintes bibliotecas:
 
-- `eslint`: Uma ferramenta de linting para JavaScript e JSX.
-- `husky`: Utilizado para garantir que todos os commits sigam as regras de linting.
-- `lint-staged`: Utilizado em conjunto com o husky para executar o linting apenas nos arquivos que foram alterados.
-- `prettier`: Uma ferramenta para formatar automaticamente o código.
-- `tailwindcss`: Uma biblioteca para a construção de interfaces de usuário personalizadas.
-- `xml-js`: Uma biblioteca para converter XML para JSON e vice-versa.
+- [Bibliotecas](#-packages)
+- [O que é o ShopAll](#-why-shopall)
 
-Selecionei um conjunto de bibliotecas que acredito ser essencial para manter a consistência e eficiência no desenvolvimento, mantendo assim uma estrutura padronizada no código.
 
-<p align="right">(<a href="#readme-top">Voltar</a>)</p>
+## 📦 Pacotes
 
-### Construido com
+### Pacotes Utilizados
 
-Aqui estão as tecnologias que utilizei para desenvolver o template.
+| Nome | Descrição |
+| --- | --- |
+| [`Shadcn/ui`](https://github.com/shadcn/ui) | Biblioteca de componentes React com integração Tailwind CSS |
+| [`Zod`](https://github.com/colinhacks/zod) | Validação de esquemas TypeScript-first |
+| [`Next-themes`](https://github.com/pacocoursey/next-themes) | Gerenciamento de temas para apps Next.js |
+| [`Tailwindcss`](https://tailwindcss.com/) | Framework CSS utilitário para estilização rápida |
+| [`Bcryptjs`](https://www.npmjs.com/package/bcryptjs) | Biblioteca para criptografia de senhas no Node.js |
+| [`Cors`](https://github.com/expressjs/cors) | Middleware para habilitar CORS (Cross-Origin Resource Sharing) |
+| [`Axios`](https://axios-http.com/) | Cliente HTTP baseado em Promises para fazer requisições |
+| [`Eslint`](https://eslint.org/) | Ferramenta para encontrar e corrigir problemas no código JavaScript |
+| [`Storybook`](https://storybook.js.org/) | Ferramenta para desenvolver componentes UI de forma isolada |
+| [`Plop`](https://plopjs.com/) | Gerador de código focado em templates personalizados |
+| [`Husky`](https://typicode.github.io/husky) | Gerenciador de hooks Git para automação de tarefas |
+| [`Prettier`](https://prettier.io/) | Formatador de código para manter consistência |
+| [`Typescript`](https://www.typescriptlang.org/) | Superset de JavaScript com tipagem estática |
+| [`Jest`](https://jestjs.io/) | Framework de testes unitários para JavaScript/TypeScript |
 
-- [![Next][Next.js]][Next-url]
-- [![React][React.js]][React-url]
 
-<p align="right">(<a href="#readme-top">Voltar</a>)</p>
 
-## Começando
+## 🤖 O que é o ShopAll?
 
-Para utilizar o template, siga os passos abaixo.
+O **ShopAll** é uma plataforma de e-commerce inovadora que oferece uma experiência de compra fluida e intuitiva para a venda de produtos de diversas categorias. O ShopAll combina facilidade de uso e um design moderno, permitindo que os usuários explorem, escolham e comprem produtos de maneira eficiente.
 
-## Contribuindo
+### Desenvolvimento
 
-Contribuições são o que tornam a comunidade de código aberto um ambiente de crescimento. Todas as contribuições que você fizer serão **muito apreciadas**.
-
-Se você tiver uma sugestão que possa tornar isso melhor, por favor, faça um fork do repositório e crie uma pull request. Você também pode simplesmente abrir uma issue com a tag "melhoria".
-Não se esqueça de dar uma estrela ao projeto! Obrigado novamente!
-
-1. Faça um Fork do Projeto
-2. Crie um novo Branch para a sua Feature (`git checkout -b feature/Novidade`)
-3. Faça suas Mudanças (`git commit -m 'Adicione alguma mensagem'`)
-4. Faça o Push para o Branch (`git push origin feature/Novidade`)
-5. Abra uma Pull Request
-
-<p align="right">(<a href="#readme-top">Voltar</a>)</p>
-
-## Contact
-
-José Antonio Motta - [Linkedin](https://www.linkedin.com/in/jos%C3%A9-antonio-bueno-motta-61006a26b/)
-
-Link do projeto: [https://github.com/EuMotta/template-typescript-nextjs](https://github.com/EuMotta/template-typescript-nextjs)
-
-<p align="right">(<a href="#readme-top">Voltar</a>)</p>
-
-<h1 align="center">
-    <div>Obrigado!</div>
-</h1>
-
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/josé-antonio-bueno-motta-61006a26b/
-[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
-[Next-url]: https://nextjs.org/
-[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[React-url]: https://reactjs.org/
+O desenvolvimento está sendo feito em nextjs/typescript com o banco de dados mongodb. Não existe uma previsão de término, pois se trata de um projeto acadêmico, onde vou utilizar para estudar e entender melhores estruturas para meus futuros projetos.
