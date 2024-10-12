@@ -45,7 +45,7 @@ const Page = () => {
                   {favoriteItems.data.length < 1 && (
                     <NoData
                       image="/stickers/carrinho-vazio.png"
-                      title="Você não tem nenhum item no carrinho =("
+                      title="Você não tem nenhum item nos favoritos =("
                       subtitle="Não perca tempo, adicione agora"
                     />
                   )}

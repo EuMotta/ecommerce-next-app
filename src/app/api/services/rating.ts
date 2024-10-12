@@ -1,20 +1,55 @@
 import db from '@/lib/mongodb';
 import Product from '@/models/product/Product';
-import Rating from '@/models/review/Review';
+import Review from '@/models/review/Review';
+import mongoose from 'mongoose';
 
 export class ReviewsService {
   async getReview(id: any = {}, limit: number) {
     try {
       await db.connect();
-      const reviews = await Rating.find({ product: id }).limit(limit).exec();
+      const aggregationPipeline: Array<mongoose.PipelineStage> = [];
 
-      const total_count = await Rating.countDocuments({ product: id }).exec();
+      aggregationPipeline.push({
+        $match: { product: new mongoose.Types.ObjectId(id) },
+      });
 
-      const average_rating =
-        reviews.length > 0
-          ? reviews.reduce((sum, rating) => sum + rating.rating, 0) /
-            reviews.length
-          : 0;
+      aggregationPipeline.push({
+        $lookup: {
+          from: 'users',
+          localField: 'user',
+          foreignField: '_id',
+          as: 'user',
+        },
+      });
+
+      aggregationPipeline.push({
+        $unwind: { path: '$user', preserveNullAndEmptyArrays: true },
+      });
+
+      aggregationPipeline.push({
+        $sort: { createdAt: -1 },
+      });
+
+      aggregationPipeline.push({
+        $limit: limit,
+      });
+
+      aggregationPipeline.push({
+        $group: {
+          _id: null,
+          average_rating: { $avg: '$rating' },
+          reviews: { $push: '$$ROOT' },
+          total_count: { $sum: 1 },
+        },
+      });
+
+      const result = await Review.aggregate(aggregationPipeline).exec();
+
+      if (result.length === 0) {
+        return { reviews: [], total_count: 0, average_rating: 0 };
+      }
+
+      const { reviews, average_rating, total_count } = result[0];
 
       return { reviews, total_count, average_rating };
     } catch (error) {
@@ -38,7 +73,7 @@ export class ReviewsService {
       if (!product) {
         throw new Error('Produto não encontrado');
       }
-      /*       const alreadyRated = await Rating.exists({
+      /*       const alreadyRated = await Review.exists({
         user: userId,
         product: product._id,
       }); */
@@ -46,7 +81,7 @@ export class ReviewsService {
       /*       if (alreadyRated) {
         throw new Error('Você já avaliou este produto');
       } */
-      const review = new Rating({
+      const review = new Review({
         user: userId,
         product: product._id,
         rating,

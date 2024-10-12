@@ -423,35 +423,43 @@ export const data = {
       warranty: 5,
       technicalSpecifications: {
         characteristics:
-          'Cadeira com tecnologia Frost Free e eficiência energética avançada.',
+          'Cadeira com design ergonômico e tecnologia avançada para gamers.',
         specifications: [
           {
-            title: 'Capacidade Total',
-            description: ['500 litros'],
+            title: 'Material',
+            description: ['Couro sintético de alta qualidade'],
           },
           {
-            title: 'Tipo de Refrigeração',
-            description: ['Frost Free'],
-          },
-          {
-            title: 'Consumo de Energia',
-            description: ['Classe A++'],
-          },
-          {
-            title: 'Número de Portas',
-            description: ['2 portas'],
+            title: 'Ajustes',
+            description: [
+              'Ajuste de altura',
+              'Encosto reclinável até 180°',
+              'Apoio para pés retrátil',
+            ],
           },
           {
             title: 'Recursos Adicionais',
-            description: ['Dispensador de água', 'Prateleiras ajustáveis'],
+            description: [
+              'LED RGB',
+              'Rodas giratórias 360°',
+              'Suporte lombar ajustável',
+            ],
+          },
+          {
+            title: 'Dimensões',
+            description: [
+              'Altura: 130 cm',
+              'Largura: 60 cm',
+              'Profundidade: 60 cm',
+            ],
           },
         ],
       },
       price: 1200,
       skus: ['66de35051957e148d7440f23', '66de35051957e148d7440f12'],
-      slug: 'cadeira-frost-free-com-tecnologia-avancada',
+      slug: 'cadeira-gamer-thunderx-fury-xg-400',
       summary:
-        'Geladeira Frost Free com capacidade de 500 litros e eficiência energética A++.',
+        'Cadeira Gamer Thunderx Fury com encosto reclinável e LED RGB, ideal para longas sessões de jogos.',
       cover: '/products/coverfridge.png',
       sub_category: '66dcc4ff55c8d7a840dbbd71',
       created_at: '2024-09-13T00:00:00Z',

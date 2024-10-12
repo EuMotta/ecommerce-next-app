@@ -16,13 +16,13 @@ const inter = Roboto({
 
 export const metadata: Metadata = {
   title: 'Home',
-  description: 'Motta',
+  description: 'ShopAll',
   icons: [
     {
       rel: 'icon',
       type: 'image/png',
       sizes: '32x32',
-      url: '/favicon/M.svg',
+      url: '/shopall-imagem-dark.svg',
     },
   ],
 };

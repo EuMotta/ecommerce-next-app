@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { BsCartXFill } from 'react-icons/bs';
 
 import Container from '@/components/common/container';
+import AddFavoriteButton from '@/components/favorite/add-favorite';
 import CepInputForm from '@/components/input/cep-input-form';
 import { AddToCart } from '@/components/product/add-to-cart';
 import { ProductCarousel } from '@/components/product/product-carousel';
@@ -24,7 +25,7 @@ import { useGetProductRatings } from '@/hooks/data-product-ratings/get-product-r
 import { useGetProduct } from '@/hooks/data-product/get-product';
 import { Sku } from '@/interfaces/sku';
 import { ProductProvider } from '@/providers/product';
-import { ChevronLeft, HeartIcon, Tag } from 'lucide-react';
+import { ChevronLeft, Tag } from 'lucide-react';
 
 import currencyConverter from '@/utils/Conversions/currencyConverter';
 
@@ -42,13 +43,14 @@ const Page = ({ params }: Params) => {
     error,
   } = useGetProduct(params.code);
   const product = products?.product;
-  console.log(product);
   const {
     data: reviews,
     isLoading: isLoadingRatings,
     isError: isErrorRatings,
     error: errorRatings,
   } = useGetProductRatings({ id: product?._id, limit: commentsSize });
+  console.log(reviews);
+
   const router = useRouter();
   const loadMoreComments = () => {
     setCommentsSize((prevSize) => prevSize + 5);
@@ -67,7 +69,7 @@ const Page = ({ params }: Params) => {
   };
 
   return (
-    <div className="p-2">
+    <div className="min-h-[80vh] p-2">
       <Button
         variant={'outline'}
         size={'icon'}
@@ -123,7 +125,7 @@ const Page = ({ params }: Params) => {
                   </div>
                   <div className="h-6 border-l border-muted" />
                   <div className="flex items-center space-x-2">
-                    <HeartIcon />
+                    <AddFavoriteButton productId={product._id} />
                   </div>
                 </div>
                 <div className="flex items-center justify-center">
@@ -149,9 +151,17 @@ const Page = ({ params }: Params) => {
                         {product.company.corporate_name}
                       </Link>
                     </span>
-                    <h1 className="text-primary">
-                      {currencyConverter(product.price)}
-                    </h1>
+                    {product.price_with_discount !== null &&
+                      product.price_with_discount < product.price && (
+                        <>
+                          <h1 className="text-sm font-extrabold leading-tight text-destructive line-through">
+                            {currencyConverter(product.price)}
+                          </h1>
+                          <h1 className="text-xl font-extrabold leading-tight text-green-500">
+                            {currencyConverter(product.price_with_discount)}
+                          </h1>
+                        </>
+                      )}
                     <span className="text-xs text-muted-foreground">
                       À vista no boleto
                     </span>

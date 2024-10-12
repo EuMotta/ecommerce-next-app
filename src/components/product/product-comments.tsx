@@ -7,7 +7,7 @@ import { Reviews } from '@/interfaces/review';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { formatDistanceToNow } from 'date-fns';
-import { Loader } from 'lucide-react';
+import { Loader, TextIcon } from 'lucide-react';
 import { toast } from 'sonner';
 import * as z from 'zod';
 
@@ -101,6 +101,10 @@ const ProductComments = ({
 
   return (
     <div className="space-y-5">
+      <h4 className="mb-5 flex gap-2 uppercase">
+        <TextIcon className="text-primary" size={26} />
+        <strong>Avaliações</strong>
+      </h4>
       <ScrollArea className="h-96">
         <div className="space-y-2">
           {isLoadingRatings && 'carregando'}

@@ -1,6 +1,4 @@
-import React from 'react';
-
-import { Tag } from 'lucide-react';
+import { ClipboardList, Info } from 'lucide-react';
 
 interface TechnicalSpecificationsProps {
   characteristics: string;
@@ -19,14 +17,14 @@ const TechnicalSpecifications = ({
     <div className="space-y-10">
       <div>
         <h4 className="mb-5 flex gap-2 uppercase">
-          <Tag className="text-primary" size={26} />
+          <Info className="text-primary" size={26} />
           <strong>Características</strong>
         </h4>
         <span>{characteristics}</span>
       </div>
       <div>
         <h4 className="mb-5 flex gap-2 uppercase">
-          <Tag className="text-primary" size={26} />
+          <ClipboardList className="text-primary" size={26} />
           <strong>Descrição</strong>
         </h4>
         <div>

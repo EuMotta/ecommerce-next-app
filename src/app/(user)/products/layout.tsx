@@ -8,20 +8,20 @@ import { ChildrenProps } from '../../../../@Types/global';
 
 export const metadata: Metadata = {
   title: 'Produtos',
-  description: 'ShoPALL',
+  description: 'ShopAll',
   icons: [
     {
       rel: 'icon',
       type: 'image/png',
       sizes: '32x32',
-      url: '/favicon/M.svg',
+      url: '/shopall-imagem-dark.svg',
     },
   ],
 };
 
 export default function Dashboard({ children }: ChildrenProps) {
   return (
-    <div className="flex max-h-screen flex-col">
+    <div>
       <CarouselProducts />
       <Basic />
       {children}

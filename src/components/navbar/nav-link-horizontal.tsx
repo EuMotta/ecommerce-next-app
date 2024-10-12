@@ -82,7 +82,7 @@ const NavLinkHorizontal = () => {
           return (
             <div key={href} className="flex">
               <Button
-                variant={isActive ? 'outline' : 'ghost'}
+                variant={isActive ? 'secondary' : 'ghost'}
                 size={'sm'}
                 onClick={() => router.push(href)}
                 className={`${
